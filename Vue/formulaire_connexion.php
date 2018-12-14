@@ -11,7 +11,7 @@
 <body>
 <h1>FORMULAIRE CONNEXION</h1>
 
-<form action="..\Controleurs\connexion.php" method="post">
+<form action="..\Controleur\connexion.php" method="post">
     <label for ="pseudo"> login : </label>
     <input type="texte" name="login" value="" />
     <br>
