@@ -28,6 +28,16 @@
         }
     }
 
+    function inscription($nom, $prenom, $email, $login, $mdp){
+        $bd = new bd(); 
+        $bd->connect(); 
+        $co = $bd->getConnexion();
+        
+        $requete1 = "INSERT INTO USERS (nomUser, prenomUser)VALUES ('$nom', '$prenom' )" ; 
+        $result = mysqli_query($this->connect, $requete1)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->connect));
+        $requete2 = "INSERT INTO USERACTIF SELECT idUser, '$email', '$login', '$mdp', false FROM USERS WHERE idUser = LAST_INSERT_ID()"  ; 
+        $result = mysqli_query($this->connect, $requete2)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->connect));
+    }
 
 
 ?>
