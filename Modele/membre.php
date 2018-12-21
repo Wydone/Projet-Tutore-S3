@@ -33,10 +33,16 @@
         $bd->connect(); 
         $co = $bd->getConnexion();
         
+        $nom = $co->real_escape_string($nom); 
+        $prenom = $co->real_escape_string($prenom); 
+        $email = $co->real_escape_string($email); 
+        $login = $co->real_escape_string($login); 
+        $mdp = $co->real_escape_string($mdp); 
+
         $requete1 = "INSERT INTO USERS (nomUser, prenomUser)VALUES ('$nom', '$prenom' )" ; 
-        $result = mysqli_query($this->connect, $requete1)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->connect));
+        $result = mysqli_query($co, $requete1)  or die ("Exécution de la requête insert impossible ".mysqli_error($co));
         $requete2 = "INSERT INTO USERACTIF SELECT idUser, '$email', '$login', '$mdp', false FROM USERS WHERE idUser = LAST_INSERT_ID()"  ; 
-        $result = mysqli_query($this->connect, $requete2)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->connect));
+        $result = mysqli_query($co, $requete2)  or die ("Exécution de la requête insert impossible ".mysqli_error($co));
     }
 
 

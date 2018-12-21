@@ -11,7 +11,7 @@
 <body>
 <h1>FORMULAIRE INSCRIPTION</h1>
 
-<form action="..\Controleurs\inscription.php" method="post">
+<form action="..\Controleur\inscription.php" method="post">
     <label for ="email"> Adresse email : </label>
     <input type="texte" name="email" value="" />
     <br>
