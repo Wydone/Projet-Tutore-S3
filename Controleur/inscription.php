@@ -32,8 +32,9 @@
             ehco "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un charactère spécial"; 
         }
     }*/
-    if(inscription($nom, $prenom, $email, $login, $mdp)) {
-        connexion($login, $mdp); 
+    $m = new Membre($nom, $prenom, $email, $login, $mdp); 
+    if($m->inscription($nom, $prenom, $email, $login, $mdp)) {
+        $m->connexion($login, $mdp); 
         header('Location: ..\Vue\monprofil.php');
     } 
   
