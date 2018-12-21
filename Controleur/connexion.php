@@ -2,6 +2,7 @@
 
     require_once('..\Modele\membre.php');
     require_once('..\Modele\bdd.php'); 
+    require_once('..\Modele\cadeau.php');
 
     $bd = new bd(); 
     $bd->connect(); 
@@ -18,10 +19,14 @@
 
     if($m->verifInfos($login, $mdp)){
        
+       
         $m->connexion($login, $mdp); 
-        header('Location: ..\Vue\monprofil.php');
+        $sesCadeaux = $m->getSesCadeaux();
+        require('..\Vue\monprofil.php');
+
+        //header('Location: ..\Vue\monprofil.php');
     }else {
-        echo "Utilisateur inconnu" ;
+        echo "Utilisateur inconnu" ; // erreur à traiter
     }
 
 

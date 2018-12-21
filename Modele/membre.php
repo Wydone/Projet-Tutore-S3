@@ -1,34 +1,41 @@
 <?php
-        require_once('..\Modele\bdd.php');
+    require_once('..\Modele\bdd.php');
+    require_once('..\Modele\cadeau.php');
 class Membre{
-        private $co ; 
-        private $id ; 
-        private $nom ; 
-        private $prenom ; 
-        private $login; 
-        private $mdp;
-        private $email; 
+    
+    private $co ; 
+    private $id ; 
+    private $nom ; 
+    private $prenom ; 
+    private $login; 
+    private $mdp;
+    private $email; 
+
+    private $sesCadeaux; 
+    private $cadeauxAchete ;     
+
           
-        function __construct(){
-            $bd = new bd(); 
-            $bd->connect(); 
-            $this->co = $bd->getConnexion() ; 
+    function __construct(){
+        $bd = new bd(); 
+        $bd->connect(); 
+        $this->co = $bd->getConnexion() ; 
 
-            $nbArg = func_num_args();
+        $this->sesCadeaux = array(); 
 
-            if($nbArg == 2){ //connexion 
-                $this->login = func_get_arg(0) ;
-                $this->mdp = func_get_arg(1) ;
+        $nbArg = func_num_args();
+        if($nbArg == 2){ //connexion 
+            $this->login = func_get_arg(0) ;
+            $this->mdp = func_get_arg(1) ;
                 
-            }else if($nbArg == 5){
+        }else if($nbArg == 5){
                 
-                $this->nom = func_get_arg(0); 
-                $this->prenom = func_get_arg(1); 
-                $this->email = func_get_arg(2); 
-                $this->login = func_get_arg(3);
-                $this->mdp = func_get_arg(4);  
-            }
+            $this->nom = func_get_arg(0); 
+            $this->prenom = func_get_arg(1); 
+            $this->email = func_get_arg(2); 
+            $this->login = func_get_arg(3);
+            $this->mdp = func_get_arg(4);  
         }
+    }
 
     function connexion($login, $mdp){
 
@@ -42,12 +49,13 @@ class Membre{
         $this->email = $data['emailUser']; 
 
         session_start();
-        $_SESSION['login']= $data['idUser'] ; 
+        $_SESSION['id']= $data['idUser'] ; 
         $_SESSION['login']= $login ; 
         $_SESSION['mdp']= $mdp;
         $_SESSION['nom']= $data['nomUser'];
         $_SESSION['prenom']= $data['prenomUser'];
         $_SESSION['email']= $data['emailUser'];
+ 
     }
 
     function deconnexion() {
@@ -80,16 +88,28 @@ class Membre{
             
             $requete1 = "INSERT INTO USERS (nomUser, prenomUser)VALUES ('$nom', '$prenom' )" ; 
             $result = mysqli_query($this->co, $requete1)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
-            $requete2 = "INSERT INTO USERACTIF SELECT idUser, '$email', '$login', '$mdp', false FROM USERS WHERE idUser = LAST_INSERT_ID()"  ; 
+            $requete2 = "INSERT INTO USERACTIF SELECT idUser, '$email', '$login', '$mdp', false FROM USERS WHERE idUser = LAST_INSERT_ID()"; 
             $result = mysqli_query($this->co, $requete2)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
-            
             return true ; 
+
         }else{
+
             echo "Utilisateur existe deja ! " ;//gérer cette erreur
             return false ;
         }
     }
 
+    function getSesCadeaux(){
+        $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'"; 
+        $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co)); 
+        
+        while($row = mysqli_fetch_assoc($result)){
+            $cadeau = new Cadeau($row['idCadeau'], $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'],$row['acheteCadeau']); 
+            array_push($this->sesCadeaux, $cadeau); 
+        }
+              
+        return $this->sesCadeaux; 
+    } 
    
 }
 

@@ -12,7 +12,7 @@
 
     <h1>Mes infos</h1>
     <?php 
-        session_start();
+        
         if(!isset($_SESSION['nom'])){
             echo "error"; 
         }else {
@@ -20,7 +20,14 @@
         }
     ?> 
     <h1>Mes souhaits</h1>
+    <?php 
         
+        foreach($sesCadeaux as $cadeau){
+            
+            echo "cadeau : ".$cadeau->getNom()."\n" ; 
+        }
+        
+    ?>
     <h1>Groupes que j'administre</h1>
 
 </body>

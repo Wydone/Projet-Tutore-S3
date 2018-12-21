@@ -1,6 +1,7 @@
 <?php
     require_once('..\Modele\membre.php');
     require_once('..\Modele\bdd.php');
+    require_once('..\Modele\cadeau.php');
 
     $bd = new bd(); 
     $bd->connect(); 
@@ -34,8 +35,12 @@
     }*/
     $m = new Membre($nom, $prenom, $email, $login, $mdp); 
     if($m->inscription($nom, $prenom, $email, $login, $mdp)) {
+       
         $m->connexion($login, $mdp); 
-        header('Location: ..\Vue\monprofil.php');
+        $sesCadeaux = $m->getSesCadeaux() ; 
+        require('..\Vue\monprofil.php');
+
+       // header('Location: ..\Vue\monprofil.php');
     } 
   
     
