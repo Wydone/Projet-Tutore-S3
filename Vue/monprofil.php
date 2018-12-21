@@ -9,6 +9,8 @@
     <script src="main.js"></script>
 </head>
 <body>
+
+    <h1>Mes infos</h1>
     <?php 
         session_start();
         if(!isset($_SESSION['nom'])){
@@ -17,8 +19,9 @@
             echo "Hello ".$_SESSION['nom'] ." ".$_SESSION['prenom'];
         }
     ?> 
-
-    <h1>Mes infos</h1>
+    <h1>Mes souhaits</h1>
+        
+    <h1>Groupes que j'administre</h1>
 
 </body>
 </html>

@@ -14,8 +14,11 @@
     $login=$co->real_escape_string($login);
     $mdp=$co->real_escape_string($mdp);
 
-    if(verifInfos($login, $mdp)){
-        connexion($login, $mdp); 
+    $m = new Membre($login, $mdp); 
+
+    if($m->verifInfos($login, $mdp)){
+       
+        $m->connexion($login, $mdp); 
         header('Location: ..\Vue\monprofil.php');
     }else {
         echo "Utilisateur inconnu" ;
