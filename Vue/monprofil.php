@@ -16,7 +16,9 @@
         }else {
             echo "Hello ".$_SESSION['nom'] ." ".$_SESSION['prenom'];
         }
-    
     ?> 
+
+    <h1>Mes infos</h1>
+
 </body>
 </html>

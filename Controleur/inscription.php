@@ -34,5 +34,6 @@
     }*/
     inscription($nom, $prenom, $email, $login, $mdp); 
     connexion($login, $mdp); 
-    echo "hello ".$_SESSION['login'] ; 
+    
+    header('Location: ..\Vue\monprofil.php');
 ?>

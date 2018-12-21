@@ -16,7 +16,7 @@
 
     if(verifInfos($login, $mdp)){
         connexion($login, $mdp); 
-        echo "Success !";
+        header('Location: ..\Vue\monprofil.php');
     }else {
         echo "Utilisateur inconnu" ;
     }
