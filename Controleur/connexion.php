@@ -3,6 +3,7 @@
     require_once('..\Modele\membre.php');
     require_once('..\Modele\bdd.php'); 
     require_once('..\Modele\cadeau.php');
+    require_once('..\Modele\groupe.php');
 
     $bd = new bd(); 
     $bd->connect(); 
@@ -22,6 +23,8 @@
        
         $m->connexion($login, $mdp); 
         $sesCadeaux = $m->getSesCadeaux();
+
+        $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
         require('..\Vue\mon_profil.php');
 
         //header('Location: ..\Vue\monprofil.php');

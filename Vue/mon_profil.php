@@ -24,11 +24,18 @@
         
         foreach($sesCadeaux as $cadeau){
             
-            echo "cadeau : ".$cadeau->getNom()."\n" ; 
+            echo "cadeau : ".$cadeau->getNom()."<br>" ; 
         }
         
     ?>
     <h1>Groupes que j'administre</h1>
-
+    <?php 
+        
+        foreach($sesGroupesAdmin as $groupe){
+            
+            echo "groupe : ".$groupe->getNom()."<br>" ; 
+        }
+        
+    ?>
 </body>
 </html>

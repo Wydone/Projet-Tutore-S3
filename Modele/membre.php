@@ -1,6 +1,7 @@
 <?php
     require_once('..\Modele\bdd.php');
     require_once('..\Modele\cadeau.php');
+    require_once('..\Modele\groupe.php');
 class Membre{
     
     private $co ; 
@@ -11,8 +12,8 @@ class Membre{
     private $mdp;
     private $email; 
 
-    private $sesCadeaux; 
-    private $cadeauxAchete ;     
+    private $sesCadeaux; //la liste de ses cadeaux souhaité
+    private $sesGroupesAdmin; //la liste des groupes qu'il administre
 
           
     function __construct(){
@@ -21,6 +22,7 @@ class Membre{
         $this->co = $bd->getConnexion() ; 
 
         $this->sesCadeaux = array(); 
+        $this->sesGroupesAdmin = array(); 
 
         $nbArg = func_num_args();
         if($nbArg == 2){ //connexion 
@@ -110,6 +112,17 @@ class Membre{
               
         return $this->sesCadeaux; 
     } 
+
+    function getSesGroupesAdmin(){
+        $requete = "SELECT idGroupe, nomGroupe FROM groupe NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'"; 
+        $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co)); 
+        
+        while($row = mysqli_fetch_assoc($result)){
+            $groupe = new Groupe($row['idGroupe'], $row['nomGroupe'], $this->id);
+            array_push($this->sesGroupesAdmin, $groupe); 
+        }
+        return $this->sesGroupesAdmin; 
+    }
    
 }
 
