@@ -5,11 +5,7 @@
     require_once('..\Modele\cadeau.php');
     require_once('..\Modele\groupe.php');
 
-   // require_once('..\Vue\mon_profil.php');
-
     session_start();
-
-   
 
     $mdp =htmlspecialchars(htmlentities(strip_tags( $_POST['mdp'])));
     $verifMdp = htmlspecialchars(htmlentities(strip_tags($_POST['verfimdp']))); 

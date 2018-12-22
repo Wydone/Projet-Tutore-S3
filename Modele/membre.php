@@ -123,7 +123,7 @@ class Membre{
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co)); 
         
         while($row = mysqli_fetch_assoc($result)){
-            $cadeau = new Cadeau($row['idCadeau'], $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'],$row['acheteCadeau']); 
+            $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau']); 
             array_push($this->sesCadeaux, $cadeau); 
         }
               
@@ -146,6 +146,17 @@ class Membre{
     }
     function getNom() {
         return $this->nom ;
+    }
+
+    function ajouterCadeau($nom, $desc, $img, $lien) {
+        $cadeau = new Cadeau($this->id, $nom, $desc, $img, $lien);
+        
+
+       
+        $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur )VALUES ('$nom', '$desc', '$img', '$lien',false, '$this->id', null )" ; 
+        $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+        
+        return $this->getSesCadeaux(); 
     }
   
 }

@@ -25,7 +25,7 @@
     ?>
             <form action="..\Controleur\modifier_mdp.php" method="post">
                 <label for ="mdp"> Nouveau mot de passe : </label>
-                <input type="texte" name="mdp" value="" />
+                <input type="password" name="mdp" value="" />
                  <br>
                 <label for ="verifmdp"> Confirmer mot de passe :  </label>
                 <input type="password" name="verfimdp" value=""/>
@@ -39,10 +39,26 @@
         
         foreach($sesCadeaux as $cadeau){
             
-            echo "cadeau : ".$cadeau->getNom()."<br>" ; 
+            echo $cadeau->getNom()." : ".$cadeau->getDesc()."<br>" ; 
         }
         
     ?>
+            <h2>Ajouter un cadeau à ma liste </h2>
+            <form action="..\Controleur\ajouter_cadeau.php" method="post" enctype="multipart/form-data" >
+                <label for ="nom"> Nom : </label>
+                <input type="text" name="nom" value="" />
+                <br>
+                <label for ="desc"> Description :  </label>
+                <textarea type="textarea" name="desc" value=""></textarea>
+                <br>
+                <label for ="image"> Image : </label>
+                <input type="file" name="image" value="" />
+                <br>
+                <label for ="lien"> lien : </label>
+                <input type="text" name="lien" value="" />
+                <br>
+                <input type="submit" value="Ajouter"/>
+            </form>
     <h1>Groupes que j'administre</h1>
     <?php 
         
