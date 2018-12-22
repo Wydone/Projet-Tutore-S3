@@ -37,10 +37,11 @@
     if($m->inscription($nom, $prenom, $email, $login, $mdp)) {
        
         $m->connexion($login, $mdp); 
-        $sesCadeaux = $m->getSesCadeaux() ; 
-        require('..\Vue\mon_profil.php');
+        $sesCadeaux = $m->getSesCadeaux();
+        $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
+       
+        require('..\Vue\mon_profil.php'); //redirection mais en pouvant utiliser les variables présentes dans cette page
 
-       // header('Location: ..\Vue\monprofil.php');
     } 
   
     

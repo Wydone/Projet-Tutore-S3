@@ -23,11 +23,11 @@
        
         $m->connexion($login, $mdp); 
         $sesCadeaux = $m->getSesCadeaux();
-
         $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
+
         require('..\Vue\mon_profil.php');
 
-        //header('Location: ..\Vue\monprofil.php');
+       
     }else {
         echo "Utilisateur inconnu" ; // erreur à traiter
     }

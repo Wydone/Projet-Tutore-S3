@@ -36,6 +36,13 @@ class Membre{
             $this->email = func_get_arg(2); 
             $this->login = func_get_arg(3);
             $this->mdp = func_get_arg(4);  
+        }else if($nbArg ==6) {
+            $this->nom = func_get_arg(0); 
+            $this->prenom = func_get_arg(1); 
+            $this->email = func_get_arg(2); 
+            $this->login = func_get_arg(3);
+            $this->mdp = func_get_arg(4);  
+            $this->id = func_get_arg(5);
         }
     }
 
@@ -51,6 +58,7 @@ class Membre{
         $this->email = $data['emailUser']; 
 
         session_start();
+
         $_SESSION['id']= $data['idUser'] ; 
         $_SESSION['login']= $login ; 
         $_SESSION['mdp']= $mdp;
@@ -92,6 +100,7 @@ class Membre{
             $result = mysqli_query($this->co, $requete1)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
             $requete2 = "INSERT INTO USERACTIF SELECT idUser, '$email', '$login', '$mdp', false FROM USERS WHERE idUser = LAST_INSERT_ID()"; 
             $result = mysqli_query($this->co, $requete2)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+            
             return true ; 
 
         }else{
@@ -101,8 +110,12 @@ class Membre{
         }
     }
 
-    function modifierMdp(){
+    function modifierMdp($mdp){
+        $this->mdp = $mdp ; 
+        $requete = "UPDATE useractif SET passwordUser = '$this->mdp' WHERE idUser = '$this->id'" ; 
+        $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
         
+        return true ; 
     }
 
     function getSesCadeaux(){
@@ -127,7 +140,14 @@ class Membre{
         }
         return $this->sesGroupesAdmin; 
     }
-   
+
+    function getCo() {
+        return $this->co ; 
+    }
+    function getNom() {
+        return $this->nom ;
+    }
+  
 }
 
 
