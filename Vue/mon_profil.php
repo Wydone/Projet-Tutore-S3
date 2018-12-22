@@ -16,7 +16,19 @@
         if(!isset($_SESSION['nom'])){
             echo "error"; 
         }else {
-            echo "Hello ".$_SESSION['nom'] ." ".$_SESSION['prenom'];
+            echo $_SESSION['email']."<br>".$_SESSION['nom']."<br>".$_SESSION['prenom'];
+            ?>
+            <form action="..\Controleur\modifierMdp.php" method="post">
+                <label for ="mdp"> Nouveau mot de passe : </label>
+                <input type="texte" name="mdp" value="" />
+                 <br>
+                <label for ="verifmdp"> Confirmer mot de passe :  </label>
+                <input type="password" name="verfimdp" value=""/>
+                <br>
+    
+                <input type="submit" value="Modifier"/>
+            </form>
+    <?php 
         }
     ?> 
     <h1>Mes souhaits</h1>

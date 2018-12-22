@@ -101,6 +101,10 @@ class Membre{
         }
     }
 
+    function modifierMdp(){
+        
+    }
+
     function getSesCadeaux(){
         $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'"; 
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co)); 
