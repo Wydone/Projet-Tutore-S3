@@ -38,7 +38,7 @@
        
         $m->connexion($login, $mdp); 
         $sesCadeaux = $m->getSesCadeaux() ; 
-        require('..\Vue\monprofil.php');
+        require('..\Vue\mon_profil.php');
 
        // header('Location: ..\Vue\monprofil.php');
     } 
