@@ -1,3 +1,10 @@
+body{
+  margin:0;
+  padding: 0;
+  background: #dddddd;
+  font-family: 'Nanum Gothic', Arial, sans-serif;
+}
+
 img.logo {
   width: 50px;
   height: auto;
@@ -8,12 +15,18 @@ img.logo {
   font-weight: bold;
   padding: 20px;
   /*background-image: linear-gradient(to bottom right, red, yellow);*/
-  background-image: linear-gradient(to bottom right, SeaGreen , PaleGreen );
+  background-image: linear-gradient(to bottom right, #b71540 , PaleGreen );
+
 }
 
 .navbar li{
   padding-left: 40px;
   padding-right: 40px;
+}
+
+.navbar-light .navbar-nav .nav-item .nav-link:hover,
+.navbar-light .navbar-nav .nav-item.active .nav-link{
+
 }
 
 .visible-grand-ecran{
@@ -31,4 +44,148 @@ img.logo {
     display:block;
     clear:both;
   }
+}
+
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 70px;
+    border-top: 1px solid #e5e5e5;
+    background-color: #f5f5f5;
+}
+
+.footer-links{
+  padding-inline-start: 0px; /*supprimer le decalage de la liste*/
+  margin: 10px 0;
+}
+.footer-links li{
+  display: inline;
+  padding: 0 3px;
+}
+
+
+.banner{
+  position: relative;
+  background: url(../Image/Noel.jpg);
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  padding: 250px 0 200px;
+}
+
+.banner p{
+  margin: 1em 0 0;
+  padding: 0;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  font-family: 'Nanum Gothic', Arial, sans-serif;
+}
+
+
+.box-connect{
+  text-align: right;
+}
+
+.box-connect input[type = "text"],.box-connect input[type = "password"]{
+  border: 0;
+  background: rgba(200,200,200,0.3);
+  display: block;
+  margin : 5px auto;
+  text-align: center;
+  border: 2px solid #CE233F;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 30px;
+  transition: 0.25s;
+}
+.box-connect input[type = "text"]:hover,.box-connect input[type = "password"]:hover{
+  width: 250px;
+  background: rgba(100,100,100,0.3);
+  border-color: #b71540;
+}
+.box-connect input[type = "text"]:focus,.box-connect input[type = "password"]:focus{
+  width: 100%;
+  border-color: #b71540;
+}
+
+.box-connect input[type = "submit"],.box-connect a {
+  border: 0;
+  background: rgba(50,50,50,0.3);
+  display: block;
+  margin : 5px auto;
+  text-align: center;
+  border: 2px solid #CE233F;
+  padding: 14px 10px;
+  width:100%;
+  outline: none;
+  color: black;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.25s;
+
+
+}
+.box-connect input[type = "submit"]:hover,.box-connect a:hover{
+  width: 90%;
+  border-left-width: 40px;
+  border-color: #b71540;
+  color: #b71540;
+}
+.box-connect input[type = "submit"]:focus,.box-connect a:focus{
+  width: 90%;
+  border-color: #b71540;
+  color: #b71540;
+}
+
+.rester_connecte {
+  text-align: left;
+  font-style: italic;
+  font-size: 100px;
+}
+
+.switch{
+  margin-top: 24px;
+  margin-left: 10px;
+  /*transform: translate(-50%,-50%);*/
+}
+
+.box-checkbox {
+    text-align: right;
+    float: right;
+}
+
+.box-checkbox input[type = "checkbox"]{
+  position: relative;
+  width: 40px;
+  height: 20px;
+  -webkit-appearance:none;
+  background: #c6c6c6;
+  outline: none;
+  border-radius: 20px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.2);
+  transition: 0.5s;
+}
+.box-checkbox input:checked[type = "checkbox"]{
+  background: #b71540;
+
+}
+.box-checkbox input[type = "checkbox"]:before{
+  content:'';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  top: 0;
+  left: 0;
+  background: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+}
+.box-checkbox input:checked[type = "checkbox"]:before{
+  left: 20px;
 }

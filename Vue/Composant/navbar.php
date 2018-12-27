@@ -20,7 +20,3 @@
     </ul>
   </div>
 </nav>
-
-
-
-<?php echo 'hello'; ?>

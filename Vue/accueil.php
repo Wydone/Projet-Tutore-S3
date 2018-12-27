@@ -8,14 +8,61 @@
     <link rel="stylesheet" href="../Style/bootstrap.min.css">
 
     <link rel="stylesheet" href="../Style/style.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
 
 	<?php include'Composant/navbar.php';?>
 
+  <section class="banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>Lorem ipsum dolor sit amet</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
 
+            <form class="box-connect" action="..\Controleur\connexion.php" method="post">
+                <!--<label for ="pseudo"> login : </label><br>-->
+                <input type="text" name="login" placeholder="Login" value="" />
+                <br>
+                <!--<label for ="mdp"> Mot de passe : </label><br>-->
+                <input type="password" name="mdp" placeholder="Mot de passe" value=""/>
+                <br>
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <a href="..\Vue\formulaire_inscription.php" >S'inscrire</a>
+
+                     </div>
+                     <div class="col">
+                        <input type="submit"  value="Se connecter"/>
+                    </div>
+
+                   </div>
+                  </div>
+                  <div class="container">
+                    <div class="row box-checkbox">
+                      
+                      <p>Rester connecté </p>
+                      <input type="checkbox" class="switch" name="" value="">
+
+                    </div>
+                  </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+  </section>
 
 	<h1>test</h1>
+
+
+
+
 
 
 

@@ -31,7 +31,7 @@
 
               echo '<a class="dropdown-item" href="#">groupe Ad : '.$groupe->getNom()."</a>" ;
           }
-          
+
           //ce qu'on veut afficher
           /*
           foreach($sesGroupesMembre as $groupe){
@@ -50,6 +50,11 @@
         <a class="nav-link" href="#">Mes inactifs</a>
       </li>
     </ul>
+  <ul class="navbar-nav ml-lg-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Deconnexion</a>
+    </li>
+  </ul>
   </div>
 </nav>
 
