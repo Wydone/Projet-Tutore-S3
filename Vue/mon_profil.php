@@ -7,20 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
+
+    <?php include'Composant/meta.php';?>
 </head>
 <body>
 
+    <?php include'Composant/navbar_connect.php';?>
+
     <h1>Mes infos</h1>
-    <?php         
+    <?php
+
         if(!isset($_SESSION['nom'])){
-            echo "error"; 
+            echo "error";
         }else {
             echo $_SESSION['email']."<br>".$_SESSION['nom']."<br>".$_SESSION['prenom'];
             
         }
 
         if(isset($mdpModifie)){
-            echo "<br>mot de passe modifié <br>"; //gérer cette option 
+            echo "<br>mot de passe modifié <br>"; //gérer cette option
         }
     ?>
             <form action="..\Controleur\modifier_mdp.php" method="post">
@@ -30,10 +35,10 @@
                 <label for ="verifmdp"> Confirmer mot de passe :  </label>
                 <input type="password" name="verfimdp" value=""/>
                 <br>
-    
+
                 <input type="submit" value="Modifier"/>
             </form>
-    
+
     <h1>Mes souhaits</h1>
     <?php 
         $numeroCadeau = 0 ; 
@@ -62,13 +67,15 @@
                 <input type="submit" value="Ajouter"/>
             </form>
     <h1>Groupes que j'administre</h1>
-    <?php 
-        
+    <?php
+
         foreach($sesGroupesAdmin as $groupe){
-            
-            echo "groupe : ".$groupe->getNom()."<br>" ; 
+
+            echo "groupe : ".$groupe->getNom()."<br>" ;
         }
-        
+
     ?>
+
+      <?php include'Composant/body_script.php';?>
 </body>
 </html>
