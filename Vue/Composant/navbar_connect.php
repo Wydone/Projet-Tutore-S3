@@ -27,7 +27,17 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <?php
 
+          foreach($sesGroupesAdmin as $groupe){
 
+              echo '<a class="dropdown-item" href="#">groupe Ad : '.$groupe->getNom()."</a>" ;
+          }
+          
+          //ce qu'on veut afficher
+          /*
+          foreach($sesGroupesMembre as $groupe){
+
+              echo '<a class="dropdown-item" href="#">groupe Membre : '.$groupe->getNom()."</a>" ;
+          }*/
 
           ?>
           <div class="dropdown-divider"/></div>
