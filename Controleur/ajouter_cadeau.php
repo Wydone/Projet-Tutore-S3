@@ -15,23 +15,23 @@
             $nom =htmlspecialchars(htmlentities(strip_tags( $_POST['nom'])));
         }
         if(empty($_POST['desc'])){
-            $desc = "NULL"; 
+            $desc = NULL; 
         }else {
             $desc =htmlspecialchars(htmlentities(strip_tags( $_POST['desc'])));
         }
         /*if(!isset( $_FILES['image'])){
-            $img = "NULL"; 
+            $img = null; 
         }else{
             $img = $_FILES['image'];
         }*/
         if(empty($_POST['lien'])){
-            $lien = "NULL"; 
+            $lien = NULL; 
         }else {
             $lien =htmlspecialchars(htmlentities(strip_tags( $_POST['lien'])));
         }
         
         
-        $img= "NULL"; //pour pouvoir traiter l'ajout de cadeau sans images pour le moment
+        $img= NULL; //pour pouvoir traiter l'ajout de cadeau sans images pour le moment
         $sesCadeaux = $m->ajouterCadeau($nom, $desc, $img, $lien);
         $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
        

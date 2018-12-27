@@ -148,12 +148,22 @@ class Membre{
         return $this->nom ;
     }
 
+    //je ne sais pas pourquoi il faut reussir à faire un insert into qui permet de remplir le champs vide avec la 
+    // valeur NULL au lieu de rien du tout !! 
     function ajouterCadeau($nom, $desc, $img, $lien) {
         $cadeau = new Cadeau($this->id, $nom, $desc, $img, $lien);
-        
 
-       
+               
         $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur )VALUES ('$nom', '$desc', '$img', '$lien',false, '$this->id', null )" ; 
+        $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+        
+        $cadeau->setID(); 
+        
+        return $this->getSesCadeaux(); 
+    }
+
+    function supprimerCadeau($id){
+        $requete = "DELETE FROM cadeau Where idCadeau = $id" ; 
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
         
         return $this->getSesCadeaux(); 

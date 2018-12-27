@@ -11,12 +11,12 @@
 <body>
 
     <h1>Mes infos</h1>
-    <?php 
-        
+    <?php         
         if(!isset($_SESSION['nom'])){
             echo "error"; 
         }else {
             echo $_SESSION['email']."<br>".$_SESSION['nom']."<br>".$_SESSION['prenom'];
+            
         }
 
         if(isset($mdpModifie)){
@@ -36,11 +36,13 @@
     
     <h1>Mes souhaits</h1>
     <?php 
-        
+        $numeroCadeau = 0 ; 
         foreach($sesCadeaux as $cadeau){
-            
-            echo $cadeau->getNom()." : ".$cadeau->getDesc()."<br>" ; 
-        }
+            $numeroCadeau +=1; 
+            echo $numeroCadeau.") ".$cadeau->getNom()." : ".$cadeau->getDesc()." est numero : ".$cadeau->getID(); ?>
+            <a href="..\controleur\supprimer_cadeau.php" ><button>Supprimer</button><?php $_SESSION['idCadeauSupprime']=$cadeau->getID();?></a><br>
+       
+       <?php }
         
     ?>
             <h2>Ajouter un cadeau à ma liste </h2>
