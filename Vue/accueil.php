@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../Style/style.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
   </head>
   <body>
 
@@ -19,8 +21,8 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <h2>Lorem ipsum dolor sit amet</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <h2>Noël arrive, Preparez vous!?</h2>
+            <p class="intro">Pour ce Noël, Partagez avec votre famille et vos proches ce que vous souhaiteriez recevoir et offrez leur ce qu'ils souhaitent depuis toujours. Connectez vous et rendez ce Noël inoubliable.
             </p>
 
             <form class="box-connect" action="..\Controleur\connexion.php" method="post">
@@ -44,7 +46,7 @@
                   </div>
                   <div class="container">
                     <div class="row box-checkbox">
-                      
+
                       <p>Rester connecté </p>
                       <input type="checkbox" class="switch" name="" value="">
 
@@ -60,6 +62,7 @@
 
 	<h1>test</h1>
 
+<i class="fas fa-gift"></i>
 
 
 
