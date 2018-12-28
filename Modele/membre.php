@@ -124,7 +124,7 @@ class Membre{
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
 
         while($row = mysqli_fetch_assoc($result)){
-            $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau']);
+            $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau']);
             array_push($this->sesCadeaux, $cadeau);
         }
 
@@ -160,18 +160,16 @@ class Membre{
         return $this->nom ;
     }
 
-    //je ne sais pas pourquoi il faut reussir à faire un insert into qui permet de remplir le champs vide avec la 
-    // valeur NULL au lieu de rien du tout !! 
-    function ajouterCadeau($nom, $desc, $img, $lien) {
-        $cadeau = new Cadeau($this->id, $nom, $desc, $img, $lien);
-
-               
-        $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur )VALUES ('$nom', '$desc', '$img', '$lien',false, '$this->id', null )" ; 
+    function ajouterCadeau($nom, $desc, $img, $lien, $idUser) {
+       
+        $desc = NULL; 
+        $img = NULL ; 
+        $lien = NULL; 
+    
+        $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur) VALUES ('$nom', '$desc', '$img', '$lien' , false , '$this->id', null)" ; 
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
         
-        $cadeau->setID(); 
-        
-        return $this->getSesCadeaux(); 
+         return $this->getSesCadeaux(); 
     }
 
     function supprimerCadeau($id){
