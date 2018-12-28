@@ -1,5 +1,5 @@
 <nav class="shadow navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="accueil.php"><img class="logo" src="../Image/logo.png"/></a>
+  <a class="navbar-brand" href="#"><img class="logo" src="../Image/logo.png"/></a>
 
 <!--icon site-->
   <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -15,7 +15,7 @@
       <!--grand ecran-->
 
       <li class="nav-item active visible-grand-ecran">
-        <a class="nav-link" href="#">Mes groupes <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="../Vue/mes_groupes.php">Mes groupes <span class="sr-only">(current)</span></a>
       </li>
 
       <!--petit ecran-->
@@ -44,7 +44,7 @@
           <a class="dropdown-item" href="#">Créer un groupe</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Mon profil</a>
+        <a class="nav-link" href="../Vue/mon_profil.php">Mon profil</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Mes inactifs</a>
@@ -57,7 +57,3 @@
   </ul>
   </div>
 </nav>
-
-
-
-<?php echo 'hello'; ?>

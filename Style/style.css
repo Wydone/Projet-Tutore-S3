@@ -68,9 +68,25 @@ img.logo {
 .footer {
     text-align: center;
     padding: 30px 0;
-    margin-top: 70px;
+
     border-top: 1px solid #e5e5e5;
+    color: white;
     background-color: #f5f5f5;
+    background-image: linear-gradient(125deg,#d5d5d5,#b71540,#d5d5d5,#b71540);
+    background-size: 400%;
+    animation: bganimation 25s infinite;
+}
+
+@keyframes bganimation {
+  0%{
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0% 50%;
+  }
 }
 
 .footer-links{
@@ -90,6 +106,14 @@ img.logo {
   background-size: cover;
   background-position: center;
   padding: 200px 0 200px;
+  box-shadow: inset 0 -6px 5px rgba(0, 0, 0, 0.05);
+}
+
+.banner.cadeau {
+  background: url(../Image/Cadeau.jpg);/*Boule Noel Cadeau*/
+}
+.banner.background{
+  background: #dddddd;
 }
 
 .banner p{
@@ -108,7 +132,7 @@ img.logo {
   text-align: right;
 }
 
-.box-connect input[type = "text"],.box-connect input[type = "password"]{
+.box-connect input[type = "text"],.box-connect input[type = "password"], .input-text{
   border: 0;
   background: rgba(200,200,200,0.3);
   display: block;
@@ -122,12 +146,12 @@ img.logo {
   border-radius: 30px;
   transition: 0.25s;
 }
-.box-connect input[type = "text"]:hover,.box-connect input[type = "password"]:hover{
+.box-connect input[type = "text"]:hover,.box-connect input[type = "password"]:hover, .input-text:hover{
   width: 250px;
   background: rgba(100,100,100,0.3);
   border-color: #b71540;
 }
-.box-connect input[type = "text"]:focus,.box-connect input[type = "password"]:focus{
+.box-connect input[type = "text"]:focus,.box-connect input[type = "password"]:focus, .input-text:focus{
   width: 100%;
   border-color: #b71540;
 }
@@ -226,4 +250,61 @@ img.logo {
 
 ::-webkit-scrollbar-thumb {
 	background-color: #000000;
+}
+
+.icone-color{
+  transition: all ease 2s;
+}
+.icone-color:hover {
+    transform: rotate(360deg) scale(10);
+}
+.icone-color-inv{
+  transition: all ease 2s;
+}
+.icone-color-inv:hover {
+    transform: rotate(-360deg) scale(10);
+}
+
+
+
+
+.fonctionnality{
+  margin-top: 0;
+  z-index: 100px;
+  text-align: center;
+}
+
+.sec2{
+
+  width: 100%;
+  height: 100px;
+  background: rgba(255, 0, 0, 0.0);
+  position: relative;
+  overflow: hidden;
+  /*transform: translateY(-100px);*/
+}
+.sec2:before{
+ content: '';
+ position: absolute;
+ bottom: 100%;
+ left: 0%;
+ width: 200%;
+ height: 200%;
+ background: #fff;
+ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+ transform-origin: left;
+ transform: skewY(3deg);
+}
+
+.base{
+  width: 100%;
+  height:100px;
+}
+
+.center{
+  text-align: center;
+}
+
+.margin-h2-b{
+  margin-bottom: 60px;
 }

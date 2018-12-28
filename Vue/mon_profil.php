@@ -21,7 +21,7 @@
             echo "error";
         }else {
             echo $_SESSION['email']."<br>".$_SESSION['nom']."<br>".$_SESSION['prenom'];
-            
+
         }
 
         if(isset($mdpModifie)){
@@ -40,15 +40,15 @@
             </form>
 
     <h1>Mes souhaits</h1>
-    <?php 
-        $numeroCadeau = 0 ; 
+    <?php
+        $numeroCadeau = 0 ;
         foreach($sesCadeaux as $cadeau){
-            $numeroCadeau +=1; 
+            $numeroCadeau +=1;
             echo $numeroCadeau.") ".$cadeau->getNom()." : ".$cadeau->getDesc()." est numero : ".$cadeau->getID(); ?>
             <a href="..\controleur\supprimer_cadeau.php" ><button>Supprimer</button><?php $_SESSION['idCadeauSupprime']=$cadeau->getID();?></a><br>
-       
+
        <?php }
-        
+
     ?>
             <h2>Ajouter un cadeau à ma liste </h2>
             <form action="..\Controleur\ajouter_cadeau.php" method="post" enctype="multipart/form-data" >
@@ -75,7 +75,7 @@
         }
 
     ?>
-
+      <?php include'Composant/footer.php';?>
       <?php include'Composant/body_script.php';?>
 </body>
 </html>
