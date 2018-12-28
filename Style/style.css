@@ -8,25 +8,40 @@ body{
 img.logo {
   width: 50px;
   height: auto;
+
 }
 
+.navbar-brand{
+  margin-left: 30px;
+  margin-right: 30px;
+}
 .navbar {
+  position: fixed;
   font-family: 'Nanum Gothic', Arial, sans-serif;
   font-weight: bold;
-  padding: 20px;
+  /*padding: 20px;*/
+  width: 100%;
+  background: rgba(150, 150, 150, 0.1);
+  padding: 0;
   /*background-image: linear-gradient(to bottom right, red, yellow);*/
-  background-image: linear-gradient(to bottom right, #b71540 , PaleGreen );
+  /*background-image: linear-gradient(to bottom right, #b71540 , PaleGreen );*/
+  z-index: 10;
+  transition: 0.5s;
+
 
 }
 
 .navbar li{
   padding-left: 40px;
   padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  transition: 0.5s;
 }
 
-.navbar-light .navbar-nav .nav-item .nav-link:hover,
-.navbar-light .navbar-nav .nav-item.active .nav-link{
-
+.navbar li:hover,
+.navbar-light .navbar-nav .nav-item.active{
+  background: rgba(75, 75, 75, 0.3);
 }
 
 .visible-grand-ecran{
@@ -44,6 +59,10 @@ img.logo {
     display:block;
     clear:both;
   }
+  .navbar {
+        background: #b71540;
+  }
+
 }
 
 .footer {
@@ -66,21 +85,24 @@ img.logo {
 
 .banner{
   position: relative;
-  background: url(../Image/Noel.jpg);
+  background: url(../Image/Boule.jpg);/*Boule Noel Cadeau*/
   min-height: 100vh;
   background-size: cover;
   background-position: center;
-  padding: 250px 0 200px;
+  padding: 200px 0 200px;
 }
 
 .banner p{
   margin: 1em 0 0;
   padding: 0;
+  margin-bottom: 2em;
   font-size: 1.2em;
   line-height: 1.5em;
   font-family: 'Nanum Gothic', Arial, sans-serif;
 }
-
+.banner h2{
+  font-weight: bold;
+}
 
 .box-connect{
   text-align: right;
@@ -188,4 +210,20 @@ img.logo {
 }
 .box-checkbox input:checked[type = "checkbox"]:before{
   left: 20px;
+}
+
+
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #000000;
 }

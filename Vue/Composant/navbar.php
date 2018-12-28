@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="shadow navbar navbar-expand-lg navbar-light">
   <a class="navbar-brand" href="accueil.php"><img class="logo" src="../Image/logo.png"/></a>
 
 <!--icon site-->
