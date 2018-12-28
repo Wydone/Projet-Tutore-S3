@@ -3,7 +3,7 @@
     require_once('..\Modele\cadeau.php');
     require_once('..\Modele\groupe.php');
 
-//Debut de la classe    
+    
 class Membre{
 
 //ATTRIBUTS DE LA CLASSE

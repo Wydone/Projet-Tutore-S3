@@ -2,6 +2,8 @@
  require_once('..\Modele\bdd.php');
 
 class Cadeau{
+
+//ATTRIBUTS DE LA CLASSE
     private $id ;
     private $idUser;
     private $nom ; 
@@ -10,6 +12,9 @@ class Cadeau{
     private $lien ; 
     private $achete ; 
 
+//------------------------
+//CONSTRUCTEUR DE CADEAUX
+//------------------------
     function __construct() {
         $this->idUser = func_get_arg(0); 
         $this->nom = func_get_arg(1);
@@ -20,13 +25,15 @@ class Cadeau{
       
     }
 
+//----------------
+//  GETTERS 
+//----------------
     function getNom() {
         return $this->nom ; 
     }
     function getDesc() {
         return $this->desc; 
     }
-   
     function getID() {
         return $this->id; 
     }
