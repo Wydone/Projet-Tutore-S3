@@ -2,8 +2,11 @@
     require_once('..\Modele\bdd.php');
     require_once('..\Modele\cadeau.php');
     require_once('..\Modele\groupe.php');
+
+//Debut de la classe    
 class Membre{
 
+//ATTRIBUTS DE LA CLASSE
     private $co ;
     private $id ;
     private $nom ;
@@ -14,9 +17,12 @@ class Membre{
 
     private $sesCadeaux; //la liste de ses cadeaux souhaité
     private $sesGroupesAdmin; //la liste des groupes qu'il administre
-
     private $sesGroupesMembre; //la liste des groupes dont il est membre
 
+
+//------------------------
+//CONSTRUCTEUR DE MEMBRES
+//------------------------
     function __construct(){
         $bd = new bd();
         $bd->connect();
@@ -47,6 +53,18 @@ class Membre{
         }
     }
 
+//----------------
+//  GETTERS 
+//----------------
+
+    function getCo() {
+        return $this->co ;
+    }
+    function getNom() {
+        return $this->nom ;
+    }
+
+//FONCTION DE CONNEXION (SI L'UTILISATEUR EXISTE DEJA) 
     function connexion($login, $mdp){
 
         $requete = "SELECT idUser, nomUser, prenomUser, emailUser FROM useractif NATURAL JOIN users WHERE loginUser='$login' AND passwordUser= '$mdp'";
@@ -66,16 +84,16 @@ class Membre{
         $_SESSION['nom']= $data['nomUser'];
         $_SESSION['prenom']= $data['prenomUser'];
         $_SESSION['email']= $data['emailUser'];
-
     }
 
+//FONCTION DE DECONNEXION
     function deconnexion() {
         session_destroy() ;
         mysqli_close($this->connect);
     }
 
+//FONCTION DE VERIFICATION POUR VOIR SI L'UTILISATEUR EXITE DANS LA BASE DE DONNEES    
     function verifInfos($login, $mdp){
-
 
         $requete = "SELECT idUser FROM useractif WHERE loginUser='$login' AND passwordUser= '$mdp'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
@@ -87,6 +105,7 @@ class Membre{
         }
     }
 
+//AJOUTER UN NOUVEAU MEMBRE DANS LA BASE DE DONNEES     
     function inscription($nom, $prenom, $email, $login, $mdp){
 
         $this->nom = $this->co->real_escape_string($nom);
@@ -111,6 +130,7 @@ class Membre{
         }
     }
 
+//FONCTION DE MODIFICATION DE MDP POUR UN UTILISATEUR QUI EXISTE DEJA
     function modifierMdp($mdp){
         $this->mdp = $mdp ;
         $requete = "UPDATE useractif SET passwordUser = '$this->mdp' WHERE idUser = '$this->id'" ;
@@ -119,6 +139,7 @@ class Membre{
         return true ;
     }
 
+//FONCTION POUR OBTENIR LA LISTE DES CADEAUX D'UN MEMBRE
     function getSesCadeaux(){
         $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
@@ -131,6 +152,7 @@ class Membre{
         return $this->sesCadeaux;
     }
 
+//FONCTION POUR OBTENIR LA LISTE DE GROUPE QUE LE MEBRE ADMINISTRE 
     function getSesGroupesAdmin(){
         $requete = "SELECT idGroupe, nomGroupe FROM groupe NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
@@ -142,6 +164,7 @@ class Membre{
         return $this->sesGroupesAdmin;
     }
 
+//FONCTION POUR OBTENIR LA LISTE DES GROUPE DONT LE MEMBRE FAIT PARTIE
     function getSesGroupesMembre(){
         $requete = "SELECT idGroupe, nomGroupe FROM groupe NATURAL JOIN appartient NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
@@ -153,13 +176,7 @@ class Membre{
         return $this->sesGroupesMembre;
     }
 
-    function getCo() {
-        return $this->co ;
-    }
-    function getNom() {
-        return $this->nom ;
-    }
-
+//FONCTION D'AJOUT D'UN NOUVEAU CADEAU A SA LISTE DE CADEAUX SOUHAITE
     function ajouterCadeau($nom, $desc, $img, $lien, $idUser) {
        
         $desc = NULL; 
@@ -172,6 +189,7 @@ class Membre{
          return $this->getSesCadeaux(); 
     }
 
+//FONCTION DE SUPPRESSION D'UN CADEAU DE SA LISTE DE CADEAUX SOUHAITE
     function supprimerCadeau($id){
         $requete = "DELETE FROM cadeau Where idCadeau = $id" ; 
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
