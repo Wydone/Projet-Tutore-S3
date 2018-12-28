@@ -32,7 +32,7 @@
         
         
         $img= NULL; //pour pouvoir traiter l'ajout de cadeau sans images pour le moment
-        $sesCadeaux = $m->ajouterCadeau($nom, $desc, $img, $lien);
+        $sesCadeaux = $m->ajouterCadeau($nom, $desc, $img, $lien, $_SESSION['id'] );
         $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
        
         require('..\Vue\mon_profil.php');

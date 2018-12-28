@@ -12,8 +12,8 @@
     
     $id = $_SESSION['idCadeauSupprime']; 
     echo $id ; 
-   // $sesCadeaux = $m->supprimerCadeau($_SESSION['idCadeauSupprime']); 
+    $sesCadeaux = $m->supprimerCadeau($_SESSION['idCadeauSupprime']); 
     $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
     
-   // require('..\Vue\mon_profil.php');
+    require('..\Vue\mon_profil.php');
 ?>
