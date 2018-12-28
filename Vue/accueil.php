@@ -61,9 +61,9 @@
   </section>
 
 
-<section class="sec1"></section>
-<section class="sec2">
-</section>
+
+
+<section class="sec2"></section>
 
 <section class="fonctionnality">
   <div class="container">
