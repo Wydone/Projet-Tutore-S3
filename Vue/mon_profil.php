@@ -36,7 +36,7 @@
                 <input type="password" name="verfimdp" value=""/>
                 <br>
 
-                <input type="submit" value="Modifier"/>
+                <input type="submit" value="Modifier" name="submit"/>
             </form>
 
     <h1>Mes souhaits</h1>
@@ -64,7 +64,7 @@
                 <label for ="lien"> lien : </label>
                 <input type="text" name="lien" value="" />
                 <br>
-                <input type="submit" value="Ajouter"/>
+                <input type="submit" value="Ajouter" name ="submit"/>
             </form>
     <h1>Groupes que j'administre</h1>
     <?php
