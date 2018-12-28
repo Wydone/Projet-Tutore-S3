@@ -60,7 +60,23 @@
       </div>
   </section>
 
-	<h1>test</h1>
+
+<section class="sec1"></section>
+<section class="sec2">
+</section>
+
+<section class="fonctionnality">
+  <div class="container">
+      <h1 id="fonctionnalitees">Fonctionnalitées</h1>
+    <div class="row">
+
+
+    </div>
+
+  </div>
+</section>
+
+
 
 <i class="fas fa-gift"></i>
 

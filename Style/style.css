@@ -70,7 +70,23 @@ img.logo {
     padding: 30px 0;
     margin-top: 70px;
     border-top: 1px solid #e5e5e5;
+    color: white;
     background-color: #f5f5f5;
+    background-image: linear-gradient(125deg,#d5d5d5,#b71540,#d5d5d5,#b71540);
+    background-size: 400%;
+    animation: bganimation 25s infinite;
+}
+
+@keyframes bganimation {
+  0%{
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100%{
+    background-position: 0% 50%;
+  }
 }
 
 .footer-links{
@@ -226,4 +242,69 @@ img.logo {
 
 ::-webkit-scrollbar-thumb {
 	background-color: #000000;
+}
+
+.icone-color{
+  transition: all ease 2s;
+}
+.icone-color:hover {
+    transform: rotate(360deg) scale(10);
+}
+.icone-color-inv{
+  transition: all ease 2s;
+}
+.icone-color-inv:hover {
+    transform: rotate(-360deg) scale(10);
+}
+
+
+
+
+.fonctionnality{
+  margin-top: 0;
+  z-index: 100px;
+  text-align: center;
+}
+.sec1{
+
+  width: 100%;
+  height: 100px;
+  background: rgba(255, 0, 0, 0.0);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(-100px);
+}
+
+.sec1:before{
+ content: '';
+ position: absolute;
+ /*bottom: 100%;*/
+ left: 0%;
+ width: 200%;
+ height: 200%;
+ background: #fff;
+ transform-origin: left;
+  box-shadow:  0 -2px 5px rgba(0,0,0,.2);
+ transform: skewY(3deg);
+}
+.sec2{
+
+  width: 100%;
+  height: 100px;
+  background: rgba(255, 0, 0, 0.0);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(-100px);
+}
+.sec2:before{
+ content: '';
+ position: absolute;
+ bottom: 100%;
+ left: 0%;
+ width: 200%;
+ height: 200%;
+ background: #fff;
+ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+ transform-origin: left;
+ transform: skewY(3deg);
 }
