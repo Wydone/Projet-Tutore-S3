@@ -339,13 +339,13 @@ img.logo {
   flex: 1 0 auto;
 }
 .full-div{
-  flex: 1 1 auto;
+  flex: 1 0 auto;
 }
 .groupes{
   padding: 0;
   margin:0;
   background: #ccc;
-  max-height: 80%;
+  max-height: 74.4vh;
   overflow: auto;
 }
 
@@ -375,4 +375,33 @@ border-bottom: 2px solid black;
   font-weight: bold;
   text-decoration: none;
   transition: 0.25s;
+}
+.groupes button:hover{
+  color: #b71540;
+}
+
+.groupes a{
+  text-decoration: none;
+  color: black;
+  font-size: 30px;
+
+}
+.groupes p{
+  margin: 0;
+  margin-left: 10px;
+}
+.groupes i{
+  margin-left: 30px;
+  margin-right: 40px;
+  color: white;
+  background: black;
+  border: 2px solid black;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 2px 2px 1px 0 rgba(0, 0, 0, 0.3);
+  transition: 0.5s;
+}
+.un-groupe:hover i{
+  color: green;
+  transform: scale(2);
 }

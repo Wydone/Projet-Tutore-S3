@@ -16,11 +16,21 @@
   <div class="fluid-container full-screen">
     <div class="row margin-zero full-screen">
       <div class="col-lg-3 groupes full-div">
-          <a href="#">
+
+
+
+          <a href="#" >
             <div class="un-groupe">
-              <h2>Nom groupe</h2>
+              <div class="row margin-zero">
+
+                <p><i class="fas fa-users"></i>Nom groupe</p>
+              </div>
+
             </div>
           </a>
+
+
+
           <a href="#">
             <div class="un-groupe">
                 <h2>Nom groupe</h2>
@@ -32,12 +42,34 @@
             </div>
           </a>
 
-
+          <a href="#">
+            <div class="un-groupe">
+                <h2>Nom groupe</h2>
+            </div>
+          </a><a href="#">
+            <div class="un-groupe">
+                <h2>Nom groupe</h2>
+            </div>
+          </a><a href="#">
+            <div class="un-groupe">
+                <h2>Nom groupe</h2>
+            </div>
+          </a>
+          <a href="#">
+            <div class="un-groupe">
+                <h2>Nom groupe</h2>
+            </div>
+          </a>
+          <a href="#">
+            <div class="un-groupe">
+                <h2>Nom groupe</h2>
+            </div>
+          </a>
 
 
           <button>
             <div class="un-groupe">
-                <h2>Nom groupe</h2>
+                <h2>Nouveau groupe</h2>
             </div>
           </button>
       </div>
