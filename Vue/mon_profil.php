@@ -38,6 +38,7 @@
 
                 <input type="submit" value="Modifier"/>
             </form>
+            
 
     <h1>Mes souhaits</h1>
     <?php
@@ -45,10 +46,16 @@
         $sesCadeaux=$_SESSION['sesCadeaux'];
         foreach($sesCadeaux as $cadeau){
             $numeroCadeau +=1;
+            $id = $cadeau->getID(); 
             echo $numeroCadeau.") ".$cadeau->getNom()." : ".$cadeau->getDesc()." est numero : ".$cadeau->getID(); ?>
-            <a href="..\controleur\supprimer_cadeau.php" ><button>Supprimer</button><?php $_SESSION['idCadeauSupprime']=$cadeau->getID();?></a><br>
+          
+            <form action="..\controleur\supprimer_cadeau.php" method="get">
+                <?php echo "<input type = 'hidden' name='idCadeauSupprime' value='$id'>";?>
+                <input type="submit" value="Supprimer"/>
+            </form>
 
        <?php }
+       
     ?>
             <h2>Ajouter un cadeau à ma liste </h2>
             <form action="..\Controleur\ajouter_cadeau.php" method="post" enctype="multipart/form-data" >

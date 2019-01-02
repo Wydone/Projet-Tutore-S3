@@ -154,9 +154,9 @@ class Membre{
 //FONCTION D'AJOUT D'UN NOUVEAU CADEAU A SA LISTE DE CADEAUX SOUHAITE
     function ajouterCadeau($nom, $desc, $img, $lien, $idUser) {
 
-        $desc = NULL;
+        //$desc = NULL;
         $img = NULL ;
-        $lien = NULL;
+       // $lien = NULL;
 
         $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur) VALUES ('$nom', '$desc', '$img', '$lien' , false , '$this->id', null)" ;
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
