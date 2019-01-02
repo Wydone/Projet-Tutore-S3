@@ -40,8 +40,8 @@
         $sesCadeaux = $m->getSesCadeaux();
         $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
        
-        require('..\Vue\mon_profil.php'); //redirection mais en pouvant utiliser les variables présentes dans cette page
-
+        //require('..\Vue\mon_profil.php'); //redirection mais en pouvant utiliser les variables présentes dans cette page
+        header('Location: ..\Vue\mon_profil.php'); 
     } 
   
     

@@ -24,8 +24,8 @@
             $sesCadeaux = $m->getSesCadeaux();
             $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
             
-            require('..\Vue\mon_profil.php');
-    
+          //  require('..\Vue\mon_profil.php');
+            header('Location: ..\Vue\mon_profil.php'); 
         }
     }
 

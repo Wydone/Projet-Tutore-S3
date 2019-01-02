@@ -15,7 +15,7 @@
     $sesCadeaux = $m->supprimerCadeau($_SESSION['idCadeauSupprime']); 
     $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
     
-    require('..\Vue\mon_profil.php');
-  
+   // require('..\Vue\mon_profil.php');
+   header('Location: ..\Vue\mon_profil.php');
 
 ?>

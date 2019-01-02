@@ -11,7 +11,7 @@
   
     
 
-    if (isset($_POST['submit'])){
+   // if (isset($_POST['submit'])){
         
     $m = new Membre($_SESSION['nom'], $_SESSION['prenom'], $_SESSION['email'], $_SESSION['login'], $_SESSION['mdp'], $_SESSION['id']);
 
@@ -39,8 +39,8 @@
         $sesCadeaux = $m->ajouterCadeau($nom, $desc, $img, $lien, $_SESSION['id'] );
         $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
        
-        //header('Location : ..\Vue\mon_profil.php'); 
+        header('Location: ..\Vue\mon_profil.php');
         
-        require('..\Vue\mon_profil.php');
-    }
+        //require('..\Vue\mon_profil.php');
+    //}
 ?>
