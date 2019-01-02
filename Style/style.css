@@ -31,6 +31,10 @@ img.logo {
 
 }
 
+.navbar-red {
+  background: #b71540;
+}
+
 .navbar li{
   padding-left: 40px;
   padding-right: 40px;
@@ -307,4 +311,9 @@ img.logo {
 
 .margin-h2-b{
   margin-bottom: 60px;
+}
+
+
+.padding-page{
+  padding-top: 100px;
 }

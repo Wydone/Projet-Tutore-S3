@@ -2,6 +2,8 @@
     require_once('..\Modele\bdd.php');
     require_once('..\Modele\cadeau.php');
     require_once('..\Modele\groupe.php');
+
+
 class Membre{
 //ATTRIBUTS DE LA CLASSE
     private $co ;
@@ -151,11 +153,14 @@ class Membre{
     }
 //FONCTION D'AJOUT D'UN NOUVEAU CADEAU A SA LISTE DE CADEAUX SOUHAITE
     function ajouterCadeau($nom, $desc, $img, $lien, $idUser) {
+
         $desc = NULL;
         $img = NULL ;
         $lien = NULL;
+
         $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur) VALUES ('$nom', '$desc', '$img', '$lien' , false , '$this->id', null)" ;
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+
          return $this->getSesCadeaux();
     }
 //FONCTION DE SUPPRESSION D'UN CADEAU DE SA LISTE DE CADEAUX SOUHAITE
