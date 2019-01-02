@@ -11,19 +11,19 @@
     <?php include'Composant/meta.php';?>
 </head>
 <body>
-
+    <?php include'Composant/class.php'; ?>
     <?php include'Composant/navbar_connect.php';?>
+
+<section class="padding-page">
+
 
     <h1>Mes infos</h1>
     <?php
-
         if(!isset($_SESSION['nom'])){
             echo "error";
         }else {
             echo $_SESSION['email']."<br>".$_SESSION['nom']."<br>".$_SESSION['prenom'];
-
         }
-
         if(isset($mdpModifie)){
             echo "<br>mot de passe modifié <br>"; //gérer cette option
         }
@@ -36,19 +36,19 @@
                 <input type="password" name="verfimdp" value=""/>
                 <br>
 
-                <input type="submit" value="Modifier" name="submit"/>
+                <input type="submit" value="Modifier"/>
             </form>
 
     <h1>Mes souhaits</h1>
     <?php
         $numeroCadeau = 0 ;
+        $sesCadeaux=$_SESSION['sesCadeaux'];
         foreach($sesCadeaux as $cadeau){
             $numeroCadeau +=1;
             echo $numeroCadeau.") ".$cadeau->getNom()." : ".$cadeau->getDesc()." est numero : ".$cadeau->getID(); ?>
             <a href="..\controleur\supprimer_cadeau.php" ><button>Supprimer</button><?php $_SESSION['idCadeauSupprime']=$cadeau->getID();?></a><br>
 
        <?php }
-
     ?>
             <h2>Ajouter un cadeau à ma liste </h2>
             <form action="..\Controleur\ajouter_cadeau.php" method="post" enctype="multipart/form-data" >
@@ -64,17 +64,22 @@
                 <label for ="lien"> lien : </label>
                 <input type="text" name="lien" value="" />
                 <br>
-                <input type="submit" value="Ajouter" name ="submit"/>
+                <input type="submit" value="Ajouter"/>
             </form>
     <h1>Groupes que j'administre</h1>
     <?php
-
+        if(!isset($_SESSION['sesGroupesAdmin'])){
+        echo "error sesGroupesAdmin";}
+        $sesGroupesAdmin=$_SESSION['sesGroupesAdmin'];
         foreach($sesGroupesAdmin as $groupe){
-
             echo "groupe : ".$groupe->getNom()."<br>" ;
         }
-
     ?>
+
+
+</section>
+
+
       <?php include'Composant/footer.php';?>
       <?php include'Composant/body_script.php';?>
 </body>

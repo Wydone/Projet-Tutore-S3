@@ -18,16 +18,19 @@
 
     <h1>Créer un nouveau compte</h1>
     <form action="..\Controleur\ajouter_inactif.php" method="post">
-                <label for ="email"> Nouveau mot de passe : </label>
-                <input type="text" name="email" value="" />
+                <label for ="nom"> Nom : </label>
+                <input type="text" name="nom" value="" />
                  <br>
-                <label for ="verifmdp"> Confirmer mot de passe :  </label>
-                <input type="password" name="verfimdp" value=""/>
+                <label for ="prenom"> Prenom : </label>
+                <input type="text" name="prenom" value=""/>
                 <br>
 
                 <input type="submit" value="Modifier"/>
             </form>
 
+    <?php include'Composant/body_script.php';?>
+
+    <?php include'Composant/footer.php';?>
     <?php include'Composant/body_script.php';?>
 </body>
 </html>

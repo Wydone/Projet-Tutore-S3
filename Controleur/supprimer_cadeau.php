@@ -5,8 +5,10 @@
     require_once('..\Modele\cadeau.php');
     require_once('..\Modele\groupe.php');
 
-    session_start();
+  
 
+    session_start();
+    
     $m = new Membre($_SESSION['nom'], $_SESSION['prenom'], $_SESSION['email'], $_SESSION['login'], $_SESSION['mdp'], $_SESSION['id']);
     $co = $m->getCo(); 
     
@@ -14,4 +16,6 @@
     $sesGroupesAdmin = $m->getSesGroupesAdmin() ; 
     
     require('..\Vue\mon_profil.php');
+  
+
 ?>
