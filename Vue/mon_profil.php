@@ -11,8 +11,11 @@
     <?php include'Composant/meta.php';?>
 </head>
 <body>
-
+    <?php include'Composant/class.php'; ?>
     <?php include'Composant/navbar_connect.php';?>
+
+<section class="padding-page">
+
 
     <h1>Mes infos</h1>
     <?php
@@ -42,6 +45,7 @@
     <h1>Mes souhaits</h1>
     <?php
         $numeroCadeau = 0 ;
+        $sesCadeaux=$_SESSION['sesCadeaux'];
         foreach($sesCadeaux as $cadeau){
             $numeroCadeau +=1;
             echo $numeroCadeau.") ".$cadeau->getNom()." : ".$cadeau->getDesc()." est numero : ".$cadeau->getID(); ?>
@@ -68,13 +72,20 @@
             </form>
     <h1>Groupes que j'administre</h1>
     <?php
+        if(!isset($_SESSION['sesGroupesAdmin'])){
+        echo "error sesGroupesAdmin";}
 
+        $sesGroupesAdmin=$_SESSION['sesGroupesAdmin'];
         foreach($sesGroupesAdmin as $groupe){
 
             echo "groupe : ".$groupe->getNom()."<br>" ;
         }
-
     ?>
+
+
+</section>
+
+
       <?php include'Composant/footer.php';?>
       <?php include'Composant/body_script.php';?>
 </body>

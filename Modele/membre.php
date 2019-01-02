@@ -3,7 +3,7 @@
     require_once('..\Modele\cadeau.php');
     require_once('..\Modele\groupe.php');
 
-    
+
 class Membre{
 
 //ATTRIBUTS DE LA CLASSE
@@ -30,6 +30,7 @@ class Membre{
 
         $this->sesCadeaux = array();
         $this->sesGroupesAdmin = array();
+        $this->sesGroupesMembre = array();
 
         $nbArg = func_num_args();
         if($nbArg == 2){ //connexion
@@ -54,7 +55,7 @@ class Membre{
     }
 
 //----------------
-//  GETTERS 
+//  GETTERS
 //----------------
 
     function getCo() {
@@ -64,7 +65,7 @@ class Membre{
         return $this->nom ;
     }
 
-//FONCTION DE CONNEXION (SI L'UTILISATEUR EXISTE DEJA) 
+//FONCTION DE CONNEXION (SI L'UTILISATEUR EXISTE DEJA)
     function connexion($login, $mdp){
 
         $requete = "SELECT idUser, nomUser, prenomUser, emailUser FROM useractif NATURAL JOIN users WHERE loginUser='$login' AND passwordUser= '$mdp'";
@@ -84,6 +85,12 @@ class Membre{
         $_SESSION['nom']= $data['nomUser'];
         $_SESSION['prenom']= $data['prenomUser'];
         $_SESSION['email']= $data['emailUser'];
+
+        //ajout SESSION sesGroupesAdmin, sesCadeaux
+        $_SESSION['sesCadeaux']= $this->sesCadeaux;
+        $_SESSION['sesGroupesAdmin']= $this->sesGroupesAdmin;
+        $_SESSION['sesGroupesMembre']= $this->sesGroupesMembre;
+
     }
 
 //FONCTION DE DECONNEXION
@@ -92,7 +99,7 @@ class Membre{
         mysqli_close($this->connect);
     }
 
-//FONCTION DE VERIFICATION POUR VOIR SI L'UTILISATEUR EXITE DANS LA BASE DE DONNEES    
+//FONCTION DE VERIFICATION POUR VOIR SI L'UTILISATEUR EXITE DANS LA BASE DE DONNEES
     function verifInfos($login, $mdp){
 
         $requete = "SELECT idUser FROM useractif WHERE loginUser='$login' AND passwordUser= '$mdp'";
@@ -105,7 +112,7 @@ class Membre{
         }
     }
 
-//AJOUTER UN NOUVEAU MEMBRE DANS LA BASE DE DONNEES     
+//AJOUTER UN NOUVEAU MEMBRE DANS LA BASE DE DONNEES
     function inscription($nom, $prenom, $email, $login, $mdp){
 
         $this->nom = $this->co->real_escape_string($nom);
@@ -148,11 +155,12 @@ class Membre{
             $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau']);
             array_push($this->sesCadeaux, $cadeau);
         }
-
+        //met a jour la session
+        $_SESSION['sesCadeaux']= $this->sesCadeaux;
         return $this->sesCadeaux;
     }
 
-//FONCTION POUR OBTENIR LA LISTE DE GROUPE QUE LE MEBRE ADMINISTRE 
+//FONCTION POUR OBTENIR LA LISTE DE GROUPE QUE LE MEBRE ADMINISTRE
     function getSesGroupesAdmin(){
         $requete = "SELECT idGroupe, nomGroupe FROM groupe NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
@@ -161,6 +169,8 @@ class Membre{
             $groupe = new Groupe($row['idGroupe'], $row['nomGroupe'], $this->id);
             array_push($this->sesGroupesAdmin, $groupe);
         }
+        //met a jour la session
+        $_SESSION['sesGroupesAdmin']= $this->sesGroupesAdmin;
         return $this->sesGroupesAdmin;
     }
 
@@ -173,28 +183,30 @@ class Membre{
             $groupe = new Groupe($row['idGroupe'], $row['nomGroupe'], $this->id);
             array_push($this->sesGroupesMembre, $groupe);
         }
+        //met a jour la session
+        $_SESSION['sesGroupesMembre']= $this->sesGroupesMembre;
         return $this->sesGroupesMembre;
     }
 
 //FONCTION D'AJOUT D'UN NOUVEAU CADEAU A SA LISTE DE CADEAUX SOUHAITE
     function ajouterCadeau($nom, $desc, $img, $lien, $idUser) {
-       
-        $desc = NULL; 
-        $img = NULL ; 
-        $lien = NULL; 
-    
-        $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur) VALUES ('$nom', '$desc', '$img', '$lien' , false , '$this->id', null)" ; 
+
+        $desc = NULL;
+        $img = NULL ;
+        $lien = NULL;
+
+        $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur) VALUES ('$nom', '$desc', '$img', '$lien' , false , '$this->id', null)" ;
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
-        
-         return $this->getSesCadeaux(); 
+
+         return $this->getSesCadeaux();
     }
 
 //FONCTION DE SUPPRESSION D'UN CADEAU DE SA LISTE DE CADEAUX SOUHAITE
     function supprimerCadeau($id){
-        $requete = "DELETE FROM cadeau Where idCadeau = $id" ; 
+        $requete = "DELETE FROM cadeau Where idCadeau = $id" ;
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
-        
-        return $this->getSesCadeaux(); 
+
+        return $this->getSesCadeaux();
     }
 
 }

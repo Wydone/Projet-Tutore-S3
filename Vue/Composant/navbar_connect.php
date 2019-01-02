@@ -1,4 +1,5 @@
-<nav class="shadow navbar navbar-expand-lg navbar-light">
+<?php session_start(); ?>
+<nav class="shadow navbar navbar-red navbar-expand-lg navbar-light">
   <a class="navbar-brand" href="#"><img class="logo" src="../Image/logo.png"/></a>
 
 <!--icon site-->
@@ -27,17 +28,17 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <?php
 
-          foreach($sesGroupesAdmin as $groupe){
+          /*foreach($sesGroupesAdmin as $groupe){
 
               echo '<a class="dropdown-item" href="#">groupe Ad : '.$groupe->getNom()."</a>" ;
-          }
+          }*/
 
           //ce qu'on veut afficher
-          /*
+          $sesGroupesMembre=$_SESSION['sesGroupesMembre'];
           foreach($sesGroupesMembre as $groupe){
 
               echo '<a class="dropdown-item" href="#">groupe Membre : '.$groupe->getNom()."</a>" ;
-          }*/
+          }
 
           ?>
           <div class="dropdown-divider"/></div>
