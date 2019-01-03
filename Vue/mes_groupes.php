@@ -18,6 +18,22 @@
       <div class="col-lg-3 groupes full-div">
 
 
+        <?php
+        $sesGroupesMembre=$_SESSION['sesGroupesMembre'];
+        foreach($sesGroupesMembre as $groupe){
+
+          echo '<a onclick="load_GroupebyId('.$groupe->getID().')" href="#" >';
+            echo '<div class="un-groupe">';
+              echo '<div class="row margin-zero">';
+                echo '<p><i class="fas fa-users"></i>'.$groupe->getNom().'</p>';
+              echo '</div>';
+            echo '</div>';
+          echo '</a>';
+        }
+
+        ?>
+
+
 
           <a href="#" >
             <div class="un-groupe">
@@ -33,38 +49,22 @@
 
           <a href="#">
             <div class="un-groupe">
-                <h2>Nom groupe</h2>
-            </div>
-          </a>
-          <a href="#">
-            <div class="un-groupe">
-                <h2>Nom groupe</h2>
+              <div class="row margin-zero">
+
+                <p><i class="fas fa-exclamation-circle"></i>Nom groupe</p>
+              </div>
+
             </div>
           </a>
 
+
+
           <a href="#">
             <div class="un-groupe">
-                <h2>Nom groupe</h2>
-            </div>
-          </a><a href="#">
-            <div class="un-groupe">
-                <h2>Nom groupe</h2>
-            </div>
-          </a><a href="#">
-            <div class="un-groupe">
-                <h2>Nom groupe</h2>
+                <h2>test</h2>
             </div>
           </a>
-          <a href="#">
-            <div class="un-groupe">
-                <h2>Nom groupe</h2>
-            </div>
-          </a>
-          <a href="#">
-            <div class="un-groupe">
-                <h2>Nom groupe</h2>
-            </div>
-          </a>
+
 
 
           <button>
@@ -73,11 +73,53 @@
             </div>
           </button>
       </div>
-      <div class="col membres">
-        <div class="un-membre">
-              <h2>test</h2>
-        </div>
-      </div>
+
+<!--L'affichage du groupe-->
+
+
+
+          <?php
+          $sesGroupesMembre=$_SESSION['sesGroupesMembre'];
+          foreach($sesGroupesMembre as $groupe){
+              echo   '<article id="'.$groupe->getID().'" class="col membres invisible">';
+                echo '<div class="un-membre">';
+                  echo '<h2>'.$groupe->getNom().'</h2>';
+                echo '</div>';
+              echo '</article>';
+
+          }
+          ?>
+
+          <article class="col membres">
+
+
+
+
+
+            <div class=" col-sm-4 un-membre">
+              <h2 id="2">test</h2>
+              <h2 id="2">test</h2>
+              <h2 id="2">test</h2>
+              <h2 id="2">test</h2>
+              <h2 id="2">test</h2>
+              <h2 id="2">test</h2>
+              <h2 id="2">test</h2>
+              <h2 id="2">test</h2>
+
+
+            </div>
+            <div class="col-sm-4 un-membre">
+              <h2 id="2">test</h2>
+
+            </div>
+            <div class=" col-sm-4 un-membre">
+              <h2 id="2">test</h2>
+
+            </div>
+            <div class=" col-sm-4 un-membre">
+              <h2 id="2">test</h2>
+            </div>
+          </article>
 
     </div>
   </div>
@@ -85,6 +127,16 @@
 
 </section>
 
+<script type="text/javascript">
+      function load_GroupebyId(id) {
+          for( var i= 0; i< 1000;i++){
+            try{
+            document.getElementById(i).className ="col membres invisible";
+          }catch(err){}
+          }
+           document.getElementById(id).className = "col membres visible";
+        }
+</script>
 
 <?php include'Composant/footer.php';?>
 

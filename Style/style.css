@@ -347,6 +347,7 @@ img.logo {
   background: #ccc;
   max-height: 74.4vh;
   overflow: auto;
+  min-width: 400px;
 }
 
 .un-groupe{
@@ -357,11 +358,28 @@ margin-bottom: 20px;*/
 border-bottom: 2px solid black;
 }
 
-.membre{
+.membres{
 
+  padding: 0;
+  margin:0;
+  background: #eee;
+  max-height: 74.4vh;
+  width: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: inline-block;
+  float: none;
 }
 
+
 .un-membre{
+
+height: 80%;
+background: #ccc;
+overflow: auto;
+display: inline-block;
+float: left;
+border:2px solid #b71540;
 
 }
 .groupes button{
@@ -404,4 +422,11 @@ border-bottom: 2px solid black;
 .un-groupe:hover i{
   color: green;
   transform: scale(2);
+}
+
+.visible{
+  display: block;
+}
+.invisible{
+  display: none;
 }
