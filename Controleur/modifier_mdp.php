@@ -6,7 +6,7 @@
     require_once('..\Modele\groupe.php');
 
     session_start();
-    if(isset($_POST ["submit"])){
+  
     $mdp =htmlspecialchars(htmlentities(strip_tags( $_POST['mdp'])));
     $verifMdp = htmlspecialchars(htmlentities(strip_tags($_POST['verfimdp']))); 
    
@@ -27,7 +27,7 @@
           //  require('..\Vue\mon_profil.php');
             header('Location: ..\Vue\mon_profil.php'); 
         }
-    }
+    
 
     
    
