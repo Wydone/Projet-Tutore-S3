@@ -40,7 +40,7 @@
             <label for ="prenom"> Prenom : </label>
             <input type="text" name="prenom" value=""/>
             <br>
-            <input type="submit" value="Modifier"/>
+            <input type="submit" value="Créer"/>
         </form>
 
     </section>

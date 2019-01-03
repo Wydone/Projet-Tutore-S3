@@ -1,4 +1,5 @@
 <?php
+
     require_once('..\Modele\membre.php');
     require_once('..\Modele\bdd.php'); 
     require_once('..\Modele\cadeau.php');
@@ -10,12 +11,16 @@
     $co = $m->getCo(); 
 
 
+    $nom = $_POST['nom']; 
+    $prenom = $_POST['prenom']; 
+    $idCreateur =  $_SESSION['id']; 
+
     $sesCadeaux = $m->getSesCadeaux();
     $sesGroupesAdmin = $m->getSesGroupesAdmin() ;
     $sesGroupesMembre = $m->getSesGroupesMembre() ;
-    $sesInactifs = $m->getSesInactifs() ;
-
-   
+    $sesInactifs = $m->ajouterInactif($nom, $prenom, $idCreateur) ;
+    
     header('Location: ..\Vue\mes_inactifs.php');
-
+       
+       
 ?>
