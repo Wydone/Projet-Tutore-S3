@@ -97,14 +97,27 @@
 
 
             <div class=" col-sm-4 un-membre">
+              <div class="entete">
+                  <i class="fas fa-user-circle"></i><br />
+                  <h2>nom du membre</h2>
+              </div>
+              <div class="table-cadeaux">
+                <table>
+                  <tr>
+                    <td>son-cadeau</td>
+                    <td><i class="fas fa-trash-alt"></i></td>
+                  </tr>
+                  <tr>
+                    <td>son-2cadeau</td>
+                    <td><i class="fas fa-trash-alt"></i></td>
+                  </tr>
+                </table>
+              </div>
+
               <h2 id="2">test</h2>
               <h2 id="2">test</h2>
-              <h2 id="2">test</h2>
-              <h2 id="2">test</h2>
-              <h2 id="2">test</h2>
-              <h2 id="2">test</h2>
-              <h2 id="2">test</h2>
-              <h2 id="2">test</h2>
+
+
 
 
             </div>
@@ -118,6 +131,14 @@
             </div>
             <div class=" col-sm-4 un-membre">
               <h2 id="2">test</h2>
+            </div>
+
+
+            <div class="col-sm-4 add-membre">
+              <div class="center-membre">
+                  <button><i class="fas fa-plus"></i></button>
+              </div>
+
             </div>
           </article>
 

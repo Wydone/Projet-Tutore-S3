@@ -362,7 +362,7 @@ border-bottom: 2px solid black;
 
   padding: 0;
   margin:0;
-  background: #eee;
+  background: #ccc;
   max-height: 74.4vh;
   width: auto;
   overflow-x: auto;
@@ -374,14 +374,73 @@ border-bottom: 2px solid black;
 
 .un-membre{
 
-height: 80%;
-background: #ccc;
-overflow: auto;
-display: inline-block;
-float: left;
-border:2px solid #b71540;
+  height: 80%;
+  background: #ccc;
+  overflow: auto;
+  display: inline-block;
+  float: left;
+  border:2px solid #b71540;
+
+  text-align: center;
+
 
 }
+.add-membre{
+  padding: 0;
+  border: 0;
+  height: 80%;
+  background: #ccc;
+  overflow: auto;
+  display: inline-block;
+  float: left;
+  border:2px solid #b71540;
+
+}
+.center-membre{
+  height: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.center-membre button{
+  padding: 0;
+  border: 0;
+  display: block;
+  width:100%;
+  height: 100%;
+  outline: none;
+  font-size: 200px;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all ease 1.5s;
+}
+
+.center-membre i{
+  color: white;
+  transition: all ease 1s;
+}
+.center-membre i:hover {
+    transform: rotate(20deg) scale(0.6);
+    color: #b71540;
+}
+
+.entete{
+margin-bottom: 20px;
+}
+.entete i{
+  margin-top: 15px;
+  font-size: 80px;
+}
+.table-cadeaux, .table-cadeaux table{
+  font-size: 30px;
+  margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
 .groupes button{
   padding: 0;
   border: 0;
