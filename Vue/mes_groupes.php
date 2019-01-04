@@ -99,14 +99,23 @@
                           echo '</div>';
                           $sesCadeaux=$membre->getSesCadeaux();
                           //table de cadeaux
+
                           echo '<div class="table-cadeaux">';
                             echo '<table>';
+                            foreach($sesCadeaux as $cadeau){
                               echo '<tr>';
-                                echo '<td>son-cadeau</td>';
-                                echo '<td><i class="fas fa-trash-alt"></i></td>';
+                                echo '<td>'.$cadeau->getNom().'</td>';
+                                echo '<td><a href="supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';
                               echo '</tr>';
+                            }
                             echo '</table>';
                            echo '</div>';
+                           //si l'user et le membre son la meme personne
+                           if ($membre->getID()==$_SESSION['id']) {
+                             echo '<div>';
+                             echo '<button class="un-groupe">Ajouter un cadeau</button>';
+                             echo '</div>';
+                           }
 
 
                         echo '</div>';
@@ -116,6 +125,12 @@
                   echo '<h2>'.$groupe->getNom().'</h2>';*/
                   /*echo '<h2>'.$groupe->getSesMembres().'</h2>';*/
 
+                //affichage du button +
+                echo '<div class="col-sm-4 add-membre">';
+                  echo '<div class="center-membre">';
+                      echo '<button onclick="visible_ajoutmembre()"><i class="fas fa-plus"></i></button>';
+                  echo '</div>';
+                echo '</div>';
 
 
 
@@ -128,7 +143,7 @@
 
           }
           ?>
-
+          <!--
           <article class="col membres">
             <div class=" col-sm-4 un-membre">
               <div class="entete">
@@ -154,13 +169,23 @@
                   <button><i class="fas fa-plus"></i></button>
               </div>
             </div>
-          </article>
+          </article>-->
 
     </div>
   </div>
-
-
 </section>
+
+
+<div id="ajout-membre" class="ajout-membre invisible">
+  <h2>Ajouter un membre</h2>
+  <form class="" action="../Controleur/ajouter_membre.php" method="post">
+    <input type="text" name="email" value="" placeholder="e-mail"><br/>
+    <input class="invisible" id="ajout-membre-input" type="text" name="ajout-membre-input" value="">
+    <input type="submit" value="Ajouter">
+  </form>
+    <button type="button" name="annuler" onclick="invisible_ajoutmembre()">Annuler</button>
+</div>
+
 
 <script type="text/javascript">
       function load_GroupebyId(id) {
@@ -170,7 +195,15 @@
           }catch(err){}
           }
            document.getElementById(id).className = "col membres visible";
+           document.getElementById("ajout-membre-input").setAttribute("value",id);
         }
+
+      function invisible_ajoutmembre(){
+        document.getElementById("ajout-membre").className = "ajout-membre invisible";
+      }
+      function visible_ajoutmembre(){
+        document.getElementById("ajout-membre").className = "ajout-membre visible";
+      }
 </script>
 
 <?php include'Composant/footer.php';?>

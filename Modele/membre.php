@@ -60,6 +60,9 @@ class Membre{
     function getPrenom() {
         return $this->prenom ;
     }
+    function getID() {
+        return $this->id ;
+    }
 //FONCTION DE CONNEXION (SI L'UTILISATEUR EXISTE DEJA)
     function connexion($login, $mdp){
         $requete = "SELECT idUser, nomUser, prenomUser, emailUser FROM useractif NATURAL JOIN users WHERE loginUser='$login' AND passwordUser= '$mdp'";
