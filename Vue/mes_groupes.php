@@ -67,7 +67,7 @@
 
 
 
-          <button>
+          <button onclick="visible_nouveaugroupe()">
             <div class="un-groupe">
                 <h2>Nouveau groupe</h2>
             </div>
@@ -186,6 +186,15 @@
     <button type="button" name="annuler" onclick="invisible_ajoutmembre()">Annuler</button>
 </div>
 
+<div id="nouveau-groupe" class="nouveau-groupe invisible">
+  <h2>Nouveau Groupe</h2>
+  <form class="" action="../Controleur/nouveau_groupe.php" method="post">
+    <input type="text" name="titre" value="" placeholder="Titre"><br/>
+    <input type="submit" value="Ajouter">
+  </form>
+    <button type="button" name="annuler" onclick="invisible_nouveaugroupe()">Annuler</button>
+</div>
+
 
 <script type="text/javascript">
       function load_GroupebyId(id) {
@@ -204,6 +213,14 @@
       function visible_ajoutmembre(){
         document.getElementById("ajout-membre").className = "ajout-membre visible";
       }
+
+      function invisible_nouveaugroupe(){
+        document.getElementById("nouveau-groupe").className = "nouveau-groupe invisible";
+      }
+      function visible_nouveaugroupe(){
+        document.getElementById("nouveau-groupe").className = "nouveau-groupe visible";
+      }
+
 </script>
 
 <?php include'Composant/footer.php';?>

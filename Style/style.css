@@ -160,7 +160,8 @@ img.logo {
   border-color: #b71540;
 }
 
-.box-connect input[type = "submit"],.box-connect a, .ajout-membre input,.ajout-membre button {
+.box-connect input[type = "submit"],.box-connect a, .ajout-membre input,.ajout-membre button
+, .nouveau-groupe input,.nouveau-groupe button {
   border: 0;
   background: rgba(50,50,50,0.3);
   display: block;
@@ -490,7 +491,7 @@ margin-bottom: 20px;
   display: none;
 }
 
-.ajout-membre {
+.ajout-membre,.nouveau-groupe {
   position: fixed;
     z-index: 1001;
     top: 30%;
@@ -502,4 +503,7 @@ margin-bottom: 20px;
     margin: -75px 0 0 -150px;
     width: 400px;
     height: 450px;
+}
+.ajout-membre h2,.nouveau-groupe h2{
+  margin-top: 30px;
 }
