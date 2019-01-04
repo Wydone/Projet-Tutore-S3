@@ -131,8 +131,14 @@
                       echo '<button onclick="visible_ajoutmembre()"><i class="fas fa-plus"></i></button>';
                   echo '</div>';
                 echo '</div>';
-
-
+                //droit de supprimer le groupe
+                if ($membre->getID()==$_SESSION['id']) {
+                  echo '<div class="col-sm-4 add-membre">';
+                    echo '<div class="center-membre">';
+                        echo '<button onclick="visible_suppr_groupe()"><p>Supprimer le<br/>Groupe</p></button>';
+                    echo '</div>';
+                  echo '</div>';
+              }
 
 
 
@@ -195,6 +201,16 @@
     <button type="button" name="annuler" onclick="invisible_nouveaugroupe()">Annuler</button>
 </div>
 
+<div id="supprimer-groupe" class="supprimer-groupe invisible">
+  <h2>Suppression Groupe</h2>
+  <p>Etes-vous sûr de vouloir supprimer le groupe?</p>
+  <form class="" action="../Controleur/supprimer_groupe.php" method="post">
+    <input class="invisible" id="supprimer-groupe-input" type="text" name="supprimer-groupe-input" value="">
+    <input type="submit" value="Supprimer">
+  </form>
+    <button type="button" name="annuler" onclick="invisible_suppr_groupe()">Annuler</button>
+</div>
+
 
 <script type="text/javascript">
       function load_GroupebyId(id) {
@@ -205,6 +221,7 @@
           }
            document.getElementById(id).className = "col membres visible";
            document.getElementById("ajout-membre-input").setAttribute("value",id);
+           document.getElementById("supprimer-groupe-input").setAttribute("value",id);
         }
 
       function invisible_ajoutmembre(){
@@ -220,6 +237,13 @@
       function visible_nouveaugroupe(){
         document.getElementById("nouveau-groupe").className = "nouveau-groupe visible";
       }
+      function invisible_suppr_groupe(){
+        document.getElementById("supprimer-groupe").className = "nouveau-groupe invisible";
+      }
+      function visible_suppr_groupe(){
+        document.getElementById("supprimer-groupe").className = "nouveau-groupe visible";
+      }
+
 
 </script>
 

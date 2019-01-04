@@ -386,7 +386,7 @@ border-bottom: 2px solid black;
 
 
 }
-.add-membre{
+.add-membre, .suppr-membre{
   padding: 0;
   border: 0;
   height: 80%;
@@ -418,7 +418,14 @@ border-bottom: 2px solid black;
   text-decoration: none;
   transition: all ease 1.5s;
 }
-
+.center-membre p{
+  font-size: 20px;
+  transition: all ease 1.5s;
+}
+.center-membre p:hover{
+  transform:scale(0.6);
+  color: #b71540;
+}
 .center-membre i{
   color: white;
   transition: all ease 1s;
@@ -491,7 +498,7 @@ margin-bottom: 20px;
   display: none;
 }
 
-.ajout-membre,.nouveau-groupe {
+.ajout-membre,.nouveau-groupe,.supprimer-groupe {
   position: fixed;
     z-index: 1001;
     top: 30%;
@@ -504,6 +511,6 @@ margin-bottom: 20px;
     width: 400px;
     height: 450px;
 }
-.ajout-membre h2,.nouveau-groupe h2{
+.ajout-membre h2,.nouveau-groupe h2,.supprimer-groupe h2{
   margin-top: 30px;
 }
