@@ -79,23 +79,57 @@
 
 
           <?php
+          $bd = new bd();
+          $bd->connect();
+          $co = $bd->getConnexion() ;
+
           $sesGroupesMembre=$_SESSION['sesGroupesMembre'];
           foreach($sesGroupesMembre as $groupe){
               echo   '<article id="'.$groupe->getID().'" class="col membres invisible">';
-                echo '<div class="un-membre">';
-                  echo '<h2>'.$groupe->getNom().'</h2>';
-                echo '</div>';
+                  $sesMembres=array();
+                  $requete = "SELECT idUser, nomUser, prenomUser FROM appartient NATURAL JOIN users WHERE idGroupe='".$groupe->getID()."'";
+                  $result = mysqli_query($co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($co));
+                  while($row = mysqli_fetch_assoc($result)){
+                        $membre = new Membre($row['idUser']);
+                        //affichage d'un membre:
+                        echo '<div class=" col-sm-4 un-membre">';
+                          echo '<div class="entete">';
+                              echo '<i class="fas fa-user-circle"></i><br />';
+                              echo '<h2>'.$membre->getNom().' ' .$membre->getPrenom(). '</h2>';
+                          echo '</div>';
+                          $sesCadeaux=$membre->getSesCadeaux();
+                          //table de cadeaux
+                          echo '<div class="table-cadeaux">';
+                            echo '<table>';
+                              echo '<tr>';
+                                echo '<td>son-cadeau</td>';
+                                echo '<td><i class="fas fa-trash-alt"></i></td>';
+                              echo '</tr>';
+                            echo '</table>';
+                           echo '</div>';
+
+
+                        echo '</div>';
+                        array_push($sesMembres, $membre);
+                  }
+                /*echo '<div class=" col-sm-4 un-membre">';
+                  echo '<h2>'.$groupe->getNom().'</h2>';*/
+                  /*echo '<h2>'.$groupe->getSesMembres().'</h2>';*/
+
+
+
+
+
+
               echo '</article>';
+
+
+
 
           }
           ?>
 
           <article class="col membres">
-
-
-
-
-
             <div class=" col-sm-4 un-membre">
               <div class="entete">
                   <i class="fas fa-user-circle"></i><br />
@@ -107,38 +141,18 @@
                     <td>son-cadeau</td>
                     <td><i class="fas fa-trash-alt"></i></td>
                   </tr>
-                  <tr>
-                    <td>son-2cadeau</td>
-                    <td><i class="fas fa-trash-alt"></i></td>
-                  </tr>
                 </table>
-              </div>
+               </div>
+             </div>
 
-              <h2 id="2">test</h2>
-              <h2 id="2">test</h2>
-
-
-
-
-            </div>
             <div class="col-sm-4 un-membre">
               <h2 id="2">test</h2>
-
             </div>
-            <div class=" col-sm-4 un-membre">
-              <h2 id="2">test</h2>
-
-            </div>
-            <div class=" col-sm-4 un-membre">
-              <h2 id="2">test</h2>
-            </div>
-
 
             <div class="col-sm-4 add-membre">
               <div class="center-membre">
                   <button><i class="fas fa-plus"></i></button>
               </div>
-
             </div>
           </article>
 

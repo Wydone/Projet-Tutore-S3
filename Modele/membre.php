@@ -27,7 +27,10 @@ class Membre{
         $this->sesGroupesAdmin = array();
         $this->sesGroupesMembre = array();
         $nbArg = func_num_args();
-        if($nbArg == 2){ //connexion
+        if($nbArg == 1){
+          $this->id = func_get_arg(0);
+          $this->trouverNomPrenom();
+        }else if($nbArg == 2){ //connexion
             $this->login = func_get_arg(0) ;
             $this->mdp = func_get_arg(1) ;
         }else if($nbArg == 5){
@@ -53,6 +56,9 @@ class Membre{
     }
     function getNom() {
         return $this->nom ;
+    }
+    function getPrenom() {
+        return $this->prenom ;
     }
 //FONCTION DE CONNEXION (SI L'UTILISATEUR EXISTE DEJA)
     function connexion($login, $mdp){
@@ -169,5 +175,17 @@ class Membre{
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
         return $this->getSesCadeaux();
     }
+
+//trouver le nom et prenom en fonction de ID
+    function trouverNomPrenom(){
+      $requete = "SELECT nomUser,prenomUser FROM USERS WHERE idUser = $this->id" ;
+      $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+      while($row = mysqli_fetch_assoc($result)){
+          $this->nom=$row['nomUser'];
+          $this->prenom=$row['prenomUser'];
+      }
+    }
+
+    //FIN CLASSE
 }
 ?>
