@@ -150,7 +150,7 @@ class Membre{
     }
 //FONCTION POUR OBTENIR LA LISTE DES GROUPE DONT LE MEMBRE FAIT PARTIE
     function getSesGroupesMembre(){
-        $requete = "SELECT idGroupe, nomGroupe FROM groupe NATURAL JOIN appartient NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
+        $requete = "SELECT groupe.idGroupe, nomGroupe FROM groupe , appartient WHERE appartient.idUser='$this->id' AND appartient.idGroupe=groupe.idGroupe";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
         while($row = mysqli_fetch_assoc($result)){
             $groupe = new Groupe($row['idGroupe'], $row['nomGroupe'], $this->id);
