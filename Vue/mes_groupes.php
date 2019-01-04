@@ -35,7 +35,7 @@
 
 
 
-          <a href="#" >
+          <!--<a href="#" >
             <div class="un-groupe">
               <div class="row margin-zero">
 
@@ -63,7 +63,7 @@
             <div class="un-groupe">
                 <h2>test</h2>
             </div>
-          </a>
+          </a>-->
 
 
 
@@ -104,8 +104,33 @@
                             echo '<table>';
                             foreach($sesCadeaux as $cadeau){
                               echo '<tr>';
+
+                                if ($membre->getID()==$_SESSION['id'] && 1==2) {//completer pour mes membres inactifs
+                                  //si cadeau acheter (acheteCadeau==1) alors barrer cadeau +image ok
+                                  if ($cadeau->getAchete()==1) {
+                                    echo '<td class="barrer">'.$cadeau->getNom().'</td>';
+                                    echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0"><i class="fas fa-check-square"></i></a></td>';
+                                  }else {
+                                    echo '<td>'.$cadeau->getNom().'</td>';
+                                    echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1"><i class="far fa-square"></i></a></td>';
+                                  }
+                                echo '<td><a href="../Controleur/supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';
+
+
+                              }elseif ($membre->getID()==$_SESSION['id']) {
                                 echo '<td>'.$cadeau->getNom().'</td>';
-                                echo '<td><a href="supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';
+                                echo '<td><a href="../Controleur/supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';
+                              }else {
+
+
+                                if ($cadeau->getAchete()==1) {
+                                  echo '<td class="barrer">'.$cadeau->getNom().'</td>';
+                                  echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0"><i class="fas fa-check-square"></i></a></td>';
+                                }else {
+                                  echo '<td>'.$cadeau->getNom().'</td>';
+                                  echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1"><i class="far fa-square"></i></a></td>';
+                                }
+                              }
                               echo '</tr>';
                             }
                             echo '</table>';
@@ -132,7 +157,7 @@
                   echo '</div>';
                 echo '</div>';
                 //droit de supprimer le groupe
-                if ($membre->getID()==$_SESSION['id']) {
+                if ($groupe->getCreateur()==$_SESSION['id']) {
                   echo '<div class="col-sm-4 add-membre">';
                     echo '<div class="center-membre">';
                         echo '<button onclick="visible_suppr_groupe()"><p>Supprimer le<br/>Groupe</p></button>';

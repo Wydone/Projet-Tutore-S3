@@ -23,6 +23,10 @@ class Groupe {
     function getID() {
         return $this->id;
     }
+    function getCreateur() {
+        return $this->createur;
+    }
+
 
     function getSesMembres(){
         $requete = "SELECT idUser, nomUser, prenomUser FROM appartient NATURAL JOIN users WHERE idGroupe='$this->id'";

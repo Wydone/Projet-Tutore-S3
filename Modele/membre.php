@@ -129,7 +129,7 @@ class Membre{
         $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
         while($row = mysqli_fetch_assoc($result)){
-            $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau']);
+            $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau'], $row['acheteCadeau']);
             array_push($this->sesCadeaux, $cadeau);
         }
         //met a jour la session
@@ -150,10 +150,10 @@ class Membre{
     }
 //FONCTION POUR OBTENIR LA LISTE DES GROUPE DONT LE MEMBRE FAIT PARTIE
     function getSesGroupesMembre(){
-        $requete = "SELECT groupe.idGroupe, nomGroupe FROM groupe , appartient WHERE appartient.idUser='$this->id' AND appartient.idGroupe=groupe.idGroupe";
+        $requete = "SELECT groupe.idGroupe, nomGroupe,groupe.idUser FROM groupe , appartient WHERE appartient.idUser='$this->id' AND appartient.idGroupe=groupe.idGroupe";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
         while($row = mysqli_fetch_assoc($result)){
-            $groupe = new Groupe($row['idGroupe'], $row['nomGroupe'], $this->id);
+            $groupe = new Groupe($row['idGroupe'], $row['nomGroupe'], $row['idUser']);
             array_push($this->sesGroupesMembre, $groupe);
         }
         //met a jour la session

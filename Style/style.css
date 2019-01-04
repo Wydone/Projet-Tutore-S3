@@ -514,3 +514,8 @@ margin-bottom: 20px;
 .ajout-membre h2,.nouveau-groupe h2,.supprimer-groupe h2{
   margin-top: 30px;
 }
+
+
+.barrer{
+  text-decoration: line-through;
+}
