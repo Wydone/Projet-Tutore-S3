@@ -20,6 +20,7 @@
     $result = mysqli_query($co, $requeteInsert) or die ("Exécution de la requête recherche impossible ".mysqli_error($co));
     $last_id = $co->insert_id;
     echo $last_id;
+    $_SESSION['idLastGroupe']=$last_id;
 
     $requeteInsertAppartient = "INSERT INTO appartient(idGroupe, idUser) VALUES ('".$last_id."','".$idAdmin."')";
     $result2 = mysqli_query($co, $requeteInsertAppartient) or die ("Exécution de la requête recherche impossible ".mysqli_error($co));

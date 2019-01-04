@@ -83,6 +83,7 @@ class Membre{
         $_SESSION['sesCadeaux']= $this->sesCadeaux;
         $_SESSION['sesGroupesAdmin']= $this->sesGroupesAdmin;
         $_SESSION['sesGroupesMembre']= $this->sesGroupesMembre;
+        $_SESSION['idLastGroupe']=1;
     }
 //FONCTION DE DECONNEXION
     function deconnexion() {

@@ -10,7 +10,8 @@
 
     $email=htmlspecialchars(htmlentities(strip_tags($_POST['email'])));
     $idGroupe= htmlspecialchars(htmlentities(strip_tags($_POST['ajout-membre-input'])));
-
+    $_SESSION['idLastGroupe']=$idGroupe;
+    
     $bd = new bd();
     $bd->connect();
     $co = $bd->getConnexion() ;

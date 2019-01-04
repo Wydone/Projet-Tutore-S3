@@ -85,7 +85,11 @@
 
           $sesGroupesMembre=$_SESSION['sesGroupesMembre'];
           foreach($sesGroupesMembre as $groupe){
+            if ($_SESSION['idLastGroupe']==$groupe->getID()) {
+                  echo   '<article id="'.$groupe->getID().'" class="col membres visible">';
+            }else{
               echo   '<article id="'.$groupe->getID().'" class="col membres invisible">';
+            }
                   $sesMembres=array();
                   $requete = "SELECT idUser, nomUser, prenomUser FROM appartient NATURAL JOIN users WHERE idGroupe='".$groupe->getID()."'";
                   $result = mysqli_query($co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($co));
@@ -109,10 +113,10 @@
                                   //si cadeau acheter (acheteCadeau==1) alors barrer cadeau +image ok
                                   if ($cadeau->getAchete()==1) {
                                     echo '<td class="barrer">'.$cadeau->getNom().'</td>';
-                                    echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0"><i class="fas fa-check-square"></i></a></td>';
+                                    echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0&idgroupe='.$groupe->getID().'"><i class="fas fa-check-square"></i></a></td>';
                                   }else {
                                     echo '<td>'.$cadeau->getNom().'</td>';
-                                    echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1"><i class="far fa-square"></i></a></td>';
+                                    echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1&idgroupe='.$groupe->getID().'"><i class="far fa-square"></i></a></td>';
                                   }
                                 echo '<td><a href="../Controleur/supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';
 
@@ -125,10 +129,10 @@
 
                                 if ($cadeau->getAchete()==1) {
                                   echo '<td class="barrer">'.$cadeau->getNom().'</td>';
-                                  echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0"><i class="fas fa-check-square"></i></a></td>';
+                                  echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0&idgroupe='.$groupe->getID().'"><i class="fas fa-check-square"></i></a></td>';
                                 }else {
                                   echo '<td>'.$cadeau->getNom().'</td>';
-                                  echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1"><i class="far fa-square"></i></a></td>';
+                                  echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1&idgroupe='.$groupe->getID().'"><i class="far fa-square"></i></a></td>';
                                 }
                               }
                               echo '</tr>';
@@ -247,6 +251,7 @@
            document.getElementById(id).className = "col membres visible";
            document.getElementById("ajout-membre-input").setAttribute("value",id);
            document.getElementById("supprimer-groupe-input").setAttribute("value",id);
+
         }
 
       function invisible_ajoutmembre(){

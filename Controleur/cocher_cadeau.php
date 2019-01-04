@@ -15,6 +15,7 @@
 
     $idcadeau=$_GET['id'];
     $newetat=$_GET['newetat'];
+    $_SESSION['idLastGroupe']=$_GET['idgroupe'];
 
     $requete="UPDATE cadeau SET acheteCadeau='".$newetat."',idUser_acheteur='".$_SESSION['id']."' WHERE  idCadeau='".$idcadeau."'";
     $result = mysqli_query($co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($co));
