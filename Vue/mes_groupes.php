@@ -123,17 +123,15 @@
 
 
 
-
+                                //SI L'UTILISATEUR POSSEDE/est CE MEMBRE
                               }elseif ($membre->getID()==$_SESSION['id']) {
 
 
-                                echo '<td>'.$cadeau->getNom().'</td>';
+
 
                                 //supprimer a tout jamais
                                 /*echo '<td><a href="../Controleur/supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';*/
-                                $bd = new bd();
-                                $bd->connect();
-                                $co = $bd->getConnexion() ;
+
                                 $requeteListe = "SELECT idListe, idCadeau FROM contient WHERE idCadeau='".$cadeau->getID()."'" ;//listeid = idgroupe
                                 $resultListe = mysqli_query($co, $requeteListe)  or die ("Exécution de la requête insert impossible ".mysqli_error($co));
                                 $countline =mysqli_num_rows($resultListe);
@@ -148,9 +146,11 @@
 
                                     if ($rowListe['idListe']==$groupe->getID()) {
                                       // si le cadeau appartient à ce groupe alors on peut le suppr
+                                      echo '<td class="vert">'.$cadeau->getNom().'</td>';
                                       echo '<td><a href="../Controleur/supprimer_cadeau_membre.php?id='.$cadeau->getID().'&idgroupe='.$groupe->getID().'"><p>Supprimer</p></a></td>';
                                     }else {
                                       // code...
+                                      echo '<td class="barrer">'.$cadeau->getNom().'</td>';
                                       echo '<td><a href="#"><p>Deja un groupe</p></a></td>';
                                     }
                                   }
@@ -158,28 +158,35 @@
 
 
                                 }else {//sinon demande d'ajout'
+                                  echo '<td>'.$cadeau->getNom().'</td>';
                                   echo '<td><a href="../Controleur/ajouter_cadeau_membre.php?id='.$cadeau->getID().'&idgroupe='.$groupe->getID().'"><p>Ajouter au groupe</p></a></td>';
 
                                 }
 
 
-
+                                //SI C4EST JUSTE UN MEMBRE DU GROUPE
                               }else {
 
 
 
-
-
-
-
-
-                                if ($cadeau->getAchete()==1) {
-                                  echo '<td class="barrer">'.$cadeau->getNom().'</td>';
-                                  echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0&idgroupe='.$groupe->getID().'"><i class="fas fa-check-square"></i></a></td>';
+                                $requeteListe2 = "SELECT idListe, idCadeau FROM contient WHERE idListe='".$groupe->getID()."' AND idCadeau='".$cadeau->getID()."'" ;//listeid = idgroupe
+                                $resultListe2 = mysqli_query($co, $requeteListe2)  or die ("Exécution de la requête insert impossible ".mysqli_error($co));
+                                $countline2 =mysqli_num_rows($resultListe2);
+                                echo $countline2;
+                                // superieur a 0 alors on affiche sinon on affiche pas
+                                if ($countline2>0) {
+                                  if ($cadeau->getAchete()==1) {
+                                    echo '<td class="barrer">'.$cadeau->getNom().'</td>';
+                                    echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0&idgroupe='.$groupe->getID().'"><i class="fas fa-check-square"></i></a></td>';
+                                  }else {
+                                    echo '<td>'.$cadeau->getNom().'</td>';
+                                    echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1&idgroupe='.$groupe->getID().'"><i class="far fa-square"></i></a></td>';
+                                  }
                                 }else {
-                                  echo '<td>'.$cadeau->getNom().'</td>';
-                                  echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1&idgroupe='.$groupe->getID().'"><i class="far fa-square"></i></a></td>';
+                                  // on affiche pas
                                 }
+
+
                               }
                               echo '</tr>';
                             }
