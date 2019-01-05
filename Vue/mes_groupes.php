@@ -197,7 +197,7 @@
                            //si l'user et le membre son la meme personne
                            if ($membre->getID()==$_SESSION['id']) {
                              echo '<div>';
-                             echo '<a href="../Vue/mon_profil.php"><button class="un-groupe">Ajouter un cadeau</button></a>';
+                             echo '<a href="../Vue/mon_profil.php"><button class="btn-membre">Ajouter un cadeau</button></a>';
                               /*echo '<div id="ajout-cadeau-membre" class="ajout-cadeau-membre invisible">';
                                 echo '<h2>test</h2>';
                               echo '</div>';*/
@@ -273,7 +273,7 @@
   <h2>Ajouter un membre</h2>
   <form class="" action="../Controleur/ajouter_membre.php" method="post">
     <input type="text" name="email" value="" placeholder="e-mail"><br/>
-    <input class="invisible" id="ajout-membre-input" type="text" name="ajout-membre-input" value="">
+    <input class="invisible" id="ajout-membre-input" type="text" name="ajout-membre-input" value="<?php echo $_SESSION['idLastGroupe'];?>">
     <input type="submit" value="Ajouter">
   </form>
     <button type="button" name="annuler" onclick="invisible_ajoutmembre()">Annuler</button>
@@ -292,7 +292,7 @@
   <h2>Suppression Groupe</h2>
   <p>Etes-vous sûr de vouloir supprimer le groupe?</p>
   <form class="" action="../Controleur/supprimer_groupe.php" method="post">
-    <input class="invisible" id="supprimer-groupe-input" type="text" name="supprimer-groupe-input" value="">
+    <input class="invisible" id="supprimer-groupe-input" type="text" name="supprimer-groupe-input" value="<?php echo $_SESSION['idLastGroupe'];?>">
     <input type="submit" value="Supprimer">
   </form>
     <button type="button" name="annuler" onclick="invisible_suppr_groupe()">Annuler</button>

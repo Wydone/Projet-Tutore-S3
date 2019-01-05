@@ -66,6 +66,10 @@ img.logo {
   .navbar {
         background: #b71540;
   }
+  .groupes {
+    display:none;
+    clear:both;
+  }
 
 }
 
@@ -435,6 +439,31 @@ border-bottom: 2px solid black;
     color: #b71540;
 }
 
+.btn-membre{
+  border: 0;
+  background: rgba(50,50,50,0.3);
+  display: block;
+  margin : 5px auto;
+  text-align: center;
+  border: 2px solid green;
+  padding: 14px 10px;
+  width:100%;
+  outline: none;
+  color: black;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.5s;
+}
+.btn-membre:hover{
+  width: 95%;
+  text-decoration: none;
+  border-left-width: 40px;
+
+  color: green;
+}
+
 .entete{
 margin-bottom: 20px;
 }
@@ -443,7 +472,7 @@ margin-bottom: 20px;
   font-size: 80px;
 }
 .table-cadeaux, .table-cadeaux table{
-  font-size: 30px;
+  font-size: 20px;
   margin-left:auto;
     margin-right:auto;
     text-align: center;
