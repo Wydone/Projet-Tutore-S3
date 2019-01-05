@@ -7,6 +7,9 @@ class Groupe {
     private $createur ;
     private $sesMembres ;
 
+    //un groupe a une liste de caceaux
+    private $saListeCadeaux ;
+
     function __construct(){
       $bd = new bd();
       $bd->connect();
@@ -15,6 +18,9 @@ class Groupe {
         $this->nom = func_get_arg(1);
         $this->createur = func_get_arg(2);
         $this->sesMembres =  array();
+
+        $this->saListeCadeaux = array();
+
     }
 
     function getNom() {

@@ -121,10 +121,56 @@
                                 echo '<td><a href="../Controleur/supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';
 
 
+
+
+
                               }elseif ($membre->getID()==$_SESSION['id']) {
+
+
                                 echo '<td>'.$cadeau->getNom().'</td>';
-                                echo '<td><a href="../Controleur/supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';
+
+                                //supprimer a tout jamais
+                                /*echo '<td><a href="../Controleur/supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';*/
+                                $bd = new bd();
+                                $bd->connect();
+                                $co = $bd->getConnexion() ;
+                                $requeteListe = "SELECT idListe, idCadeau FROM contient WHERE idCadeau='".$cadeau->getID()."'" ;//listeid = idgroupe
+                                $resultListe = mysqli_query($co, $requeteListe)  or die ("Exécution de la requête insert impossible ".mysqli_error($co));
+                                $countline =mysqli_num_rows($resultListe);
+                                echo $countline;
+                                //permet d'ajouter un cadeau dans ce groupe
+
+
+
+
+                                if ($countline>0) {//contient a idgroupe idcadeau
+                                  while ($rowListe = mysqli_fetch_assoc($resultListe)) {
+
+                                    if ($rowListe['idListe']==$groupe->getID()) {
+                                      // si le cadeau appartient à ce groupe alors on peut le suppr
+                                      echo '<td><a href="../Controleur/supprimer_cadeau_membre.php?id='.$cadeau->getID().'&idgroupe='.$groupe->getID().'"><p>Supprimer</p></a></td>';
+                                    }else {
+                                      // code...
+                                      echo '<td><a href="#"><p>Deja un groupe</p></a></td>';
+                                    }
+                                  }
+
+
+
+                                }else {//sinon demande d'ajout'
+                                  echo '<td><a href="../Controleur/ajouter_cadeau_membre.php?id='.$cadeau->getID().'&idgroupe='.$groupe->getID().'"><p>Ajouter au groupe</p></a></td>';
+
+                                }
+
+
+
                               }else {
+
+
+
+
+
+
 
 
                                 if ($cadeau->getAchete()==1) {
@@ -142,7 +188,10 @@
                            //si l'user et le membre son la meme personne
                            if ($membre->getID()==$_SESSION['id']) {
                              echo '<div>';
-                             echo '<button class="un-groupe">Ajouter un cadeau</button>';
+                             echo '<button onclick="visible_ajoutcadeaumembre('.$membre->getID().')" id="'.$membre->getID().'" class="un-groupe">Ajouter un cadeau</button>';
+                              /*echo '<div id="ajout-cadeau-membre" class="ajout-cadeau-membre invisible">';
+                                echo '<h2>test</h2>';
+                              echo '</div>';*/
                              echo '</div>';
                            }
 
@@ -240,6 +289,16 @@
     <button type="button" name="annuler" onclick="invisible_suppr_groupe()">Annuler</button>
 </div>
 
+<!--<div id="ajout-cadeau-membre" class="ajout-cadeau-membre invisible">
+  <h2>Ajouter des Cadeaux</h2>
+  <p>Voici vos cadeaux non distribués</p>
+  <form class="" action="../Controleur/ajout_cadeau_membre.php" method="post">
+    <input class="invisible" id="ajout-cadeau-membre-input" type="text" name="ajout-cadeau-membre-input" value="">
+    <input type="submit" value="Ajout">
+  </form>
+    <button type="button" name="annuler" onclick="invisible_ajoutcadeaumembre()">Annuler</button>
+</div>-->
+
 
 <script type="text/javascript">
       function load_GroupebyId(id) {
@@ -274,7 +333,13 @@
         document.getElementById("supprimer-groupe").className = "nouveau-groupe visible";
       }
 
-
+      function invisible_ajoutcadeaumembre(){
+        document.getElementById("ajout-cadeau-membre").className = "ajout-cadeau-membre invisible";
+      }
+      function visible_ajoutcadeaumembre(id){
+        document.getElementById("ajout-cadeau-membre").className = "ajout-cadeau-membre visible";
+        document.getElementById("ajout-cadeau-membre-input").setAttribute("value",id);
+      }
 </script>
 
 <?php include'Composant/footer.php';?>
