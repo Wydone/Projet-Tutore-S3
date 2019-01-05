@@ -126,7 +126,9 @@
                                 //SI L'UTILISATEUR POSSEDE/est CE MEMBRE
                               }elseif ($membre->getID()==$_SESSION['id']) {
 
-
+///////////////////////
+//GESTION DES CADEAUX DE L'UTILISATEUR DANS UN GROUPE
+///////////////////////
 
 
                                 //supprimer a tout jamais
@@ -135,7 +137,7 @@
                                 $requeteListe = "SELECT idListe, idCadeau FROM contient WHERE idCadeau='".$cadeau->getID()."'" ;//listeid = idgroupe
                                 $resultListe = mysqli_query($co, $requeteListe)  or die ("Exécution de la requête insert impossible ".mysqli_error($co));
                                 $countline =mysqli_num_rows($resultListe);
-                                echo $countline;
+
                                 //permet d'ajouter un cadeau dans ce groupe
 
 
@@ -172,7 +174,7 @@
                                 $requeteListe2 = "SELECT idListe, idCadeau FROM contient WHERE idListe='".$groupe->getID()."' AND idCadeau='".$cadeau->getID()."'" ;//listeid = idgroupe
                                 $resultListe2 = mysqli_query($co, $requeteListe2)  or die ("Exécution de la requête insert impossible ".mysqli_error($co));
                                 $countline2 =mysqli_num_rows($resultListe2);
-                                echo $countline2;
+
                                 // superieur a 0 alors on affiche sinon on affiche pas
                                 if ($countline2>0) {
                                   if ($cadeau->getAchete()==1) {
@@ -195,7 +197,7 @@
                            //si l'user et le membre son la meme personne
                            if ($membre->getID()==$_SESSION['id']) {
                              echo '<div>';
-                             echo '<button onclick="visible_ajoutcadeaumembre('.$membre->getID().')" id="'.$membre->getID().'" class="un-groupe">Ajouter un cadeau</button>';
+                             echo '<a href="../Vue/mon_profil.php"><button class="un-groupe">Ajouter un cadeau</button></a>';
                               /*echo '<div id="ajout-cadeau-membre" class="ajout-cadeau-membre invisible">';
                                 echo '<h2>test</h2>';
                               echo '</div>';*/
