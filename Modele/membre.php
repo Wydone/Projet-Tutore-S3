@@ -127,7 +127,28 @@ class Membre{
             $result = mysqli_query($this->co, $requete1)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
             $requete2 = "INSERT INTO USERACTIF SELECT idUser, '$email', '$login', '$mdp', false FROM USERS WHERE idUser = LAST_INSERT_ID()";
             $result = mysqli_query($this->co, $requete2)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+            
+            $cle = md5(microtime(TRUE)*100000);
+            
+            $destinataire = $this->email;
+            $sujet = "Activer votre compte" ;
+            $entete = "From: inscription@giftapp.lo" ;
+            $message = 'Bienvenue sur giftApp,
+ 
+            Pour activer votre compte, veuillez cliquer sur le lien ci dessous
+            ou copier/coller dans votre navigateur internet.
+             
+            http://localhost/projet-tutore-s3/Projet-Tutore-S3/controleur/validation_email.php
+             
+             
+            ---------------
+            Ceci est un mail automatique, Merci de ne pas y répondre.';
+
+            mail($destinataire, $sujet, $message, $entete) ; 
+
             return true ;
+
+
         }else{
             echo "Utilisateur existe deja ! " ;//gérer cette erreur
             return false ;
@@ -307,6 +328,11 @@ class Membre{
           $this->nom=$row['nomUser'];
           $this->prenom=$row['prenomUser'];
       }
+    }
+
+    function validationEmail(){
+        $requete = "UPDATE useractif SET verifMailUser = 1 WHERE idUser = $this->id" ; 
+        $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
     }
 
     //FIN CLASSE
