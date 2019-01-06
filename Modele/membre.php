@@ -13,7 +13,7 @@ class Membre{
     private $login;
     private $mdp;
     private $email;
-    private $idCreateur; // utile seulement si le membre est un membre inactif 
+    private $idCreateur; // utile seulement si le membre est un membre inactif
     private $sesCadeaux; //la liste de ses cadeaux souhaité
     private $sesGroupesAdmin; //la liste des groupes qu'il administre
     private $sesGroupesMembre; //la liste des groupes dont il est membre
@@ -29,7 +29,7 @@ class Membre{
         $this->sesCadeaux = array();
         $this->sesGroupesAdmin = array();
         $this->sesGroupesMembre = array();
-        $this->sesInactifs = array() ; 
+        $this->sesInactifs = array() ;
         $nbArg = func_num_args();
         if($nbArg == 1){
           $this->id = func_get_arg(0);
@@ -53,8 +53,8 @@ class Membre{
         }else if($nbArg == 4) {
             $this->nom = func_get_arg(0);
             $this->prenom = func_get_arg(1);
-            $this->id = func_get_arg(2); 
-            $this->idCreateur = func_get_arg(3); 
+            $this->id = func_get_arg(2);
+            $this->idCreateur = func_get_arg(3);
         }
     }
 //----------------
@@ -68,10 +68,10 @@ class Membre{
     }
 
     function getPrenom(){
-        return $this->prenom ; 
+        return $this->prenom ;
     }
     function getID() {
-        return $this->id; 
+        return $this->id;
 
     }
 //FONCTION DE CONNEXION (SI L'UTILISATEUR EXISTE DEJA)
@@ -165,8 +165,8 @@ class Membre{
     function getSesCadeaux(){
         $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
-        
-        
+
+
         while($row = mysqli_fetch_assoc($result)){
             $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau'], $row['acheteCadeau']);
             array_push($this->sesCadeaux, $cadeau);
@@ -234,26 +234,26 @@ class Membre{
 
 //FONCTION POUR AJOUTER UN MEMBRE INACTIF A MA LISTE D'INACTIFS
     function ajouterInactif($nom , $prenom, $idCreateur, $sesGroupes){
-        
+
         $requete1 = "INSERT INTO USERS (nomUser, prenomUser)VALUES ('$nom', '$prenom')" ;
         $result = mysqli_query($this->co, $requete1)  or die ("Exécution de la requête insert1 impossible ".mysqli_error($this->co));
         $requete2 = "INSERT INTO USERINACTIF SELECT idUser, '$idCreateur' FROM USERS WHERE idUser = LAST_INSERT_ID()";
         $result = mysqli_query($this->co, $requete2)  or die ("Exécution de la requête insert2 impossible ".mysqli_error($this->co));
-        
+
         foreach ($sesGroupes as $groupeID){
             $requete = "INSERT INTO appartient (idGroupe, idUser) VALUES ($groupeID, LAST_INSERT_ID())" ;
             $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert dans APPARTIENT impossible ".mysqli_error($this->co));
         }
 
-        return $this->getSesInactifs(); 
+        return $this->getSesInactifs();
     }
-//FONCTION DE SUPPRESSION D'UN MEMBRE INACTIF 
+//FONCTION DE SUPPRESSION D'UN MEMBRE INACTIF
     function supprimerInactif($id){
         $requete1 = "DELETE FROM users Where idUser = $id" ;
         $result = mysqli_query($this->co, $requete1)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
         $requete2 = "DELETE FROM userinactif Where idUser = $id" ;
         $result = mysqli_query($this->co, $requete2)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
-        
+
 
         $requete3 = "SELECT idUser FROM appartient Where idUser = $id" ;
         $result = mysqli_query($this->co, $requete3)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
@@ -267,36 +267,52 @@ class Membre{
     }
 
     function getSesCadeauxInactif($id){
-        $sesCadeaux = array() ; 
+        $sesCadeaux = array() ;
         $bd = new bd();
         $bd->connect();
         $this->co = $bd->getConnexion() ;
         $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN userinactif WHERE idUser='$id'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche cadeau impossible ".mysqli_error($this->co));
-        
+
         while($row = mysqli_fetch_assoc($result)){
             $cadeau = new Cadeau($id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau'], $row['acheteCadeau']);
             array_push($sesCadeaux, $cadeau);
         }
-    
+
         return $sesCadeaux;
+    }
+
+    function estInactif($id){
+        $sesCadeaux = array() ;
+        $bd = new bd();
+        $bd->connect();
+        $this->co = $bd->getConnexion() ;
+        $requete = "SELECT * FROM cadeau NATURAL JOIN userinactif WHERE idUser='$id'";
+        $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche cadeau impossible ".mysqli_error($this->co));
+        $countline =mysqli_num_rows($result);
+
+        if($countline>0){
+          return $countline;
+        }
+
+        return 0;
     }
 
     function verifGroupe($idGroupe, $idUser) {
         $requete = "SELECT * FROM appartient WHERE idGroupe = '$idGroupe' AND idUser ='$idUser' " ;
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert1 impossible ".mysqli_error($this->co));
-        
-        if(mysqli_num_rows($result) != 0)return true; 
-        else return false ; 
+
+        if(mysqli_num_rows($result) != 0)return true;
+        else return false ;
     }
 
     function modifierGroupe($sesGroupes, $idUserInactif) {
-        
+
         foreach ($this->sesGroupesMembre as $groupe){
             $requete = "DELETE FROM appartient Where idUser = $idUserInactif" ;
             $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert dans APPARTIENT impossible ".mysqli_error($this->co));
         }
-        
+
         foreach ($sesGroupes as $groupeID){
             $requete = "INSERT INTO appartient (idGroupe, idUser) VALUES ($groupeID, $idUserInactif)" ;
             $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert dans APPARTIENT impossible ".mysqli_error($this->co));
