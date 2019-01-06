@@ -17,6 +17,10 @@ class Groupe {
     function getNom() {
         return $this->nom ; 
     }
+    
+    function getIdGroupe() {
+        return $this->id ; 
+    }
 
 }
 ?>

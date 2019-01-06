@@ -14,11 +14,14 @@
     $nom = $_POST['nom']; 
     $prenom = $_POST['prenom']; 
     $idCreateur =  $_SESSION['id']; 
+    $sesGroupes = $_POST['groupe']; 
+
 
     $sesCadeaux = $m->getSesCadeaux();
     $sesGroupesAdmin = $m->getSesGroupesAdmin() ;
     $sesGroupesMembre = $m->getSesGroupesMembre() ;
-    $sesInactifs = $m->ajouterInactif($nom, $prenom, $idCreateur) ;
+
+    $sesInactifs = $m->ajouterInactif($nom, $prenom, $idCreateur, $sesGroupes) ;
     
     header('Location: ..\Vue\mes_inactifs.php');
        

@@ -201,13 +201,18 @@ class Membre{
     }
 
 //FONCTION POUR AJOUTER UN MEMBRE INACTIF A MA LISTE D'INACTIFS
-    function ajouterInactif($nom , $prenom, $idCreateur){
+    function ajouterInactif($nom , $prenom, $idCreateur, $sesGroupes){
         
         $requete1 = "INSERT INTO USERS (nomUser, prenomUser)VALUES ('$nom', '$prenom')" ;
         $result = mysqli_query($this->co, $requete1)  or die ("Exécution de la requête insert1 impossible ".mysqli_error($this->co));
         $requete2 = "INSERT INTO USERINACTIF SELECT idUser, '$idCreateur' FROM USERS WHERE idUser = LAST_INSERT_ID()";
         $result = mysqli_query($this->co, $requete2)  or die ("Exécution de la requête insert2 impossible ".mysqli_error($this->co));
         
+        foreach ($sesGroupes as $groupeID){
+            $requete = "INSERT INTO appartient (idGroupe, idUser) VALUES ($groupeID, LAST_INSERT_ID())" ;
+            $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert dans APPARTIENT impossible ".mysqli_error($this->co));
+        }
+
         return $this->getSesInactifs(); 
     }
 //FONCTION DE SUPPRESSION D'UN MEMBRE INACTIF 

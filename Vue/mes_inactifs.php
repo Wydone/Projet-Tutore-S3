@@ -39,7 +39,18 @@
             <br>
             <label for ="prenom"> Prenom : </label>
             <input type="text" name="prenom" value=""/>
-            <br>
+            <br> 
+            <fieldset>
+                <legend>Ajouter dans vos groupes séléctionnés</legend>
+
+                <?php 
+                $sesGroupesMembre=$_SESSION['sesGroupesMembre'];
+                foreach($sesGroupesMembre as $groupe){
+                    echo "<input type='checkbox' name='groupe[]' value='".$groupe->getIdGroupe()."'>";
+                    echo "<label for='groupe'>".$groupe->getNom()."</label><br>" ; 
+                }
+                ?>
+            </fieldset>
             <input type="submit" value="Créer"/>
         </form>
 
