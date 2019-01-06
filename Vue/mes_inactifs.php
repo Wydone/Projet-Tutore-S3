@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Mes inactifs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    
 
     <?php include'Composant/meta.php';?>
 </head>
@@ -22,26 +21,26 @@
             echo "error sesInactifs";}
             $sesInactifs = $_SESSION['sesInactifs'];
             foreach($sesInactifs as $membre){
-                $id = $membre->getID(); 
+                $id = $membre->getID();
                 echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID() ; ?>
 
                 <button onclick="visible_gerer_inactif()">Sa liste</button>
-                
+
                 <div id="modifier-membre-inactif" class="modifier-membre-inactif invisible">
                     <h2><?php echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID() ; ?></h2>
 
                     <?php
                     $numeroCadeau = 0 ;
-  //ERREUR ICI ----------------------------------------------                  
+  //ERREUR ICI ----------------------------------------------
                     $sesCadeaux = $_SESSION['sesCadeaux']; // permet d'avoir la liste des cadeau du créateur des inactifs
-                   
+
                    //normalement il faut faire cette ligne en dessous
-                    //$sesCadeaux = $membre->getSesCadeaux();  // commente la ligne au dessus et decommente celle-ci et sa part en couille xD 
-                   
-  //FIN ERREUR -----------------------------------------------                  
+                    //$sesCadeaux = $membre->getSesCadeaux();  // commente la ligne au dessus et decommente celle-ci et sa part en couille xD
+
+  //FIN ERREUR -----------------------------------------------
                     foreach($sesCadeaux as $cadeau){
                         $numeroCadeau +=1;
-                        $id = $cadeau->getID(); 
+                        $id = $cadeau->getID();
                         echo $numeroCadeau.") ".$cadeau->getNom()." : ".$cadeau->getDesc()." est numero : ".$cadeau->getID(); ?>
 
                         <form action="..\controleur\supprimer_cadeau.php" method="get">
@@ -49,7 +48,7 @@
                             <input type="submit" value="Supprimer"/>
                         </form>
                         <?php
-                    } 
+                    }
                         ?>
 
                     <form class="" action="../Controleur/ajouter_membre.php" method="post">
@@ -57,7 +56,7 @@
                         <input class="invisible" id="-input" type="text" name="-input" value="<?php echo $_SESSION['idLastGroupe'];?>">
                         <input type="submit" value="Ajouter">
                     </form>
-                
+
 
                     <button type="button" name="annuler" onclick="invisible_gerer_inactif()">Annuler</button>
                 </div>
@@ -76,15 +75,15 @@
             <br>
             <label for ="prenom"> Prenom : </label>
             <input type="text" name="prenom" value=""/>
-            <br> 
+            <br>
             <fieldset>
                 <legend>Ajouter dans vos groupes séléctionnés</legend>
 
-                <?php 
+                <?php
                 $sesGroupesMembre=$_SESSION['sesGroupesMembre'];
                 foreach($sesGroupesMembre as $groupe){
                     echo "<input type='checkbox' name='groupe[]' value='".$groupe->getIdGroupe()."'>";
-                    echo "<label for='groupe'>".$groupe->getNom()."</label><br>" ; 
+                    echo "<label for='groupe'>".$groupe->getNom()."</label><br>" ;
                 }
                 ?>
             </fieldset>

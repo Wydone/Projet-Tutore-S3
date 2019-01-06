@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Mon profil</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+  
 
     <?php include'Composant/meta.php';?>
 </head>
@@ -38,7 +37,7 @@
 
                 <input type="submit" value="Modifier"/>
             </form>
-            
+
 
     <h1>Mes souhaits</h1>
     <?php
@@ -46,9 +45,9 @@
         $sesCadeaux=$_SESSION['sesCadeaux'];
         foreach($sesCadeaux as $cadeau){
             $numeroCadeau +=1;
-            $id = $cadeau->getID(); 
+            $id = $cadeau->getID();
             echo $numeroCadeau.") ".$cadeau->getNom()." : ".$cadeau->getDesc()." est numero : ".$cadeau->getID(); ?>
-          
+
             <form action="..\controleur\supprimer_cadeau.php" method="get">
                 <?php echo "<input type = 'hidden' name='idCadeauSupprime' value='$id'>";?>
                 <input type="submit" value="Supprimer"/>
