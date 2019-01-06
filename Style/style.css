@@ -165,7 +165,7 @@ img.logo {
 }
 
 .box-connect input[type = "submit"],.box-connect a, .ajout-membre input,.ajout-membre button
-, .nouveau-groupe input,.nouveau-groupe button {
+, .nouveau-groupe input,.nouveau-groupe button , .modifier-membre-inactif input, .modifier-membre-inactif button {
   border: 0;
   background: rgba(50,50,50,0.3);
   display: block;
@@ -181,9 +181,11 @@ img.logo {
   font-weight: bold;
   text-decoration: none;
   transition: 0.25s;
-
-
 }
+
+
+
+
 .box-connect input[type = "submit"]:hover,.box-connect a:hover{
   width: 90%;
   border-left-width: 40px;
@@ -527,7 +529,7 @@ margin-bottom: 20px;
   display: none;
 }
 
-.ajout-membre,.nouveau-groupe,.supprimer-groupe,.ajout-cadeau-membre {
+.ajout-membre,.nouveau-groupe,.supprimer-groupe,.ajout-cadeau-membre, .modifier-membre-inactif {
   position: fixed;
     z-index: 1001;
     top: 30%;
@@ -540,7 +542,7 @@ margin-bottom: 20px;
     width: 400px;
     height: 450px;
 }
-.ajout-membre h2,.nouveau-groupe h2,.supprimer-groupe h2,.ajout-cadeau-membre h2{
+.ajout-membre h2,.nouveau-groupe h2,.supprimer-groupe h2,.ajout-cadeau-membre h2, .modifier-membre-inactif h2{
   margin-top: 30px;
 }
 

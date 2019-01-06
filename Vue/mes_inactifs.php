@@ -22,16 +22,13 @@
             $sesInactifs = $_SESSION['sesInactifs'];
             foreach($sesInactifs as $membre){
                 $id = $membre->getID();
-                echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID() ; 
-
-                
-                ?>
+                echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID(); 
+        ?>
 
                 <button onclick="visible_gerer_inactif()">Sa liste</button>
 
                 <div id="modifier-membre-inactif" class="modifier-membre-inactif invisible">
                     <h2><?php echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID() ; ?></h2>
-
                     <?php
                     $numeroCadeau = 0 ;
                     $id = $membre->getID();
@@ -48,15 +45,33 @@
                         <?php
                     }
                         ?>
+
+                    <p> Nouveau cadeau : 
+                    <form action="..\Controleur\ajouter_cadeau.php" method="post" enctype="multipart/form-data" >
+                        <input type="text" name="nom" value="" placeholder= "nom"/>
+                   
+                        <input type="text" name="desc" value="" placeholder="description" />
+                 
+                        <input type="file" name="image" value="" />
+                
+                        <input type="text" name="lien" value="" placeholder="lien"/>
+ 
+                        <input type="submit" value="Ajouter"/>
+                    </form>                    
+
                     <button type="button" name="annuler" onclick="invisible_gerer_inactif()">Annuler</button>
                 </div>
 
                 <form action="..\controleur\supprimer_inactif.php" method="get">
+                    
                     <?php echo "<input type = 'hidden' name='idUserInactif' value='$id'>";?>
                     <input type="submit" value="Supprimer"/>
                 </form>
+                
         <?php    }
         ?>
+
+         
 
         <h1>Créer un nouveau compte</h1>
         <form action="..\Controleur\ajouter_inactif.php" method="post">
