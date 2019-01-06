@@ -42,7 +42,9 @@
     <h1>Mes souhaits</h1>
     <?php
         $numeroCadeau = 0 ;
-        $sesCadeaux=$_SESSION['sesCadeaux'];
+       
+        $sesCadeaux= $_SESSION['sesCadeaux'];
+        
         foreach($sesCadeaux as $cadeau){
             $numeroCadeau +=1;
             $id = $cadeau->getID();
