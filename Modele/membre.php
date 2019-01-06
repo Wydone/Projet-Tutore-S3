@@ -210,5 +210,14 @@ class Membre{
         
         return $this->getSesInactifs(); 
     }
+//FONCTION DE SUPPRESSION D'UN MEMBRE INACTIF 
+    function supprimerInactif($id){
+        $requete1 = "DELETE FROM users Where idUser = $id" ;
+        $result = mysqli_query($this->co, $requete1)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+        $requete2 = "DELETE FROM userinactif Where idUser = $id" ;
+        $result = mysqli_query($this->co, $requete2)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+        
+        return $this->getSesInactifs();
+    }
 }
 ?>

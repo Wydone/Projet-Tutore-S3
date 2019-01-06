@@ -25,7 +25,7 @@
                 $id = $membre->getIdUser(); 
                 echo $membre->getNom()." ".$membre->getPrenom() ; ?>
                
-                <form action="..\controleur\supprimer_userinactif.php" method="get">
+                <form action="..\controleur\supprimer_inactif.php" method="get">
                     <?php echo "<input type = 'hidden' name='idUserInactif' value='$id'>";?>
                     <input type="submit" value="Supprimer"/>
                 </form>
