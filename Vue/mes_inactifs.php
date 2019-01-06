@@ -45,9 +45,23 @@
                             <input type="submit" value="Supprimer"/>
                         </form>
                         <?php
-                    }
+                    }$id = $membre->getID();    
                         ?>
+                   
+                
+                    
+                    <form action="..\Controleur\ajouter_cadeau_inactif.php" method="post" enctype="multipart/form-data" >
+                        <p>Nouveau cadeau : </p>
+                        <input type="text" name="nom" value="" placeholder= "nom" />           
+                        <textarea type="textarea" name="desc" value="" placeholder= "description"></textarea>
+                        <input type="file" name="image" value="" />
+                        <input type="text" name="lien" value="" placeholder= "lien"/>
+                        <?php echo "<input type = 'hidden' name='idUserInactif' value='$id'>";?>
+                        <input type="submit" value="Ajouter"/>
+                    </form>
+
                     <?php echo '<button type="button" name="annuler" onclick="invisible_gerer_inactif('.$membre->getID().')">Annuler</button>';?>
+
                 </div>
 
                 <form action="..\controleur\supprimer_inactif.php" method="get">

@@ -165,7 +165,8 @@ img.logo {
 }
 
 .box-connect input[type = "submit"],.box-connect a, .ajout-membre input,.ajout-membre button
-, .nouveau-groupe input,.nouveau-groupe button , .modifier-membre-inactif input, .modifier-membre-inactif button {
+, .nouveau-groupe input,.nouveau-groupe button , .modifier-membre-inactif input, 
+.modifier-membre-inactif button, .modifier-membre-inactif textarea, .modifier-membre-inactif input[type="file"] {
   border: 0;
   background: rgba(50,50,50,0.3);
   display: block;
@@ -183,7 +184,38 @@ img.logo {
   transition: 0.25s;
 }
 
+.modifier-membre-inactif input, 
+.modifier-membre-inactif button, .modifier-membre-inactif textarea, .modifier-membre-inactif input[type="file"] {
+  border: 0;
+  background: rgba(50,50,50,0.3);
+  display: block;
+  margin : 5px auto;
+  text-align: center;
+  border: 2px solid #CE233F;
+  padding: 7px 10px;
+  width:100%;
+  outline: none;
+  color: black;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.25s;
+}
 
+
+
+.box-connect input[type = "submit"]:hover,.box-connect a:hover{
+  width: 90%;
+  border-left-width: 40px;
+  border-color: #b71540;
+  color: #b71540;
+}
+.box-connect input[type = "submit"]:focus,.box-connect a:focus{
+  width: 90%;
+  border-color: #b71540;
+  color: #b71540;
+}
 
 
 .box-connect input[type = "submit"]:hover,.box-connect a:hover{
@@ -541,6 +573,20 @@ margin-bottom: 20px;
     margin: -75px 0 0 -150px;
     width: 400px;
     height: 450px;
+}
+
+.modifier-membre-inactif {
+ position: fixed;
+    z-index: 1001;
+    top: 25%;
+    left: 47.5%;
+    text-align:  center;
+    background: #b71540;
+    border-radius: 25px;
+    box-shadow: 5px 5px 30px 0 rgba(50, 0, 0, 0.5);
+    margin: -75px 0 0 -150px;
+    width: 400px;
+    height: 550px;
 }
 .ajout-membre h2,.nouveau-groupe h2,.supprimer-groupe h2,.ajout-cadeau-membre h2,.modifier-membre-inactif h2{
   margin-top: 30px;

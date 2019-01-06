@@ -185,7 +185,7 @@ class Membre{
         $img = NULL ;
        //    $lien = NULL;
 
-        $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur) VALUES ('$nom', '$desc', '$img', '$lien' , false , '$this->id', null)" ;
+        $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur) VALUES ('$nom', '$desc', '$img', '$lien' , false , '$idUser', null)" ;
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
 
          return $this->getSesCadeaux();
