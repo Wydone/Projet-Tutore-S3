@@ -529,7 +529,7 @@ margin-bottom: 20px;
   display: none;
 }
 
-.ajout-membre,.nouveau-groupe,.supprimer-groupe,.ajout-cadeau-membre, .modifier-membre-inactif {
+.ajout-membre,.nouveau-groupe,.supprimer-groupe,.ajout-cadeau-membre,.modifier-membre-inactif {
   position: fixed;
     z-index: 1001;
     top: 30%;
@@ -542,7 +542,7 @@ margin-bottom: 20px;
     width: 400px;
     height: 450px;
 }
-.ajout-membre h2,.nouveau-groupe h2,.supprimer-groupe h2,.ajout-cadeau-membre h2, .modifier-membre-inactif h2{
+.ajout-membre h2,.nouveau-groupe h2,.supprimer-groupe h2,.ajout-cadeau-membre h2,.modifier-membre-inactif h2{
   margin-top: 30px;
 }
 

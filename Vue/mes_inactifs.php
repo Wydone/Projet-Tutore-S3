@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Mes inactifs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
 
     <?php include'Composant/meta.php';?>
 </head>
@@ -22,17 +22,19 @@
             $sesInactifs = $_SESSION['sesInactifs'];
             foreach($sesInactifs as $membre){
                 $id = $membre->getID();
-                echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID(); 
-        ?>
+                echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID() ;
 
-                <button onclick="visible_gerer_inactif()">Sa liste</button>
 
-                <div id="modifier-membre-inactif" class="modifier-membre-inactif invisible">
+                ?>
+
+                <?php echo '<button onclick="visible_gerer_inactif('.$membre->getID().')">Sa liste</button>';?>
+
+                  <?php echo '<div id="modifier-membre-inactif'.$membre->getID().'" class="modifier-membre-inactif invisible">';?>
                     <h2><?php echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID() ; ?></h2>
                     <?php
                     $numeroCadeau = 0 ;
                     $id = $membre->getID();
-                    $sesCadeaux = $membre->getSesCadeauxInactif($id); 
+                    $sesCadeaux = $membre->getSesCadeauxInactif($id);
                     foreach($sesCadeaux as $cadeau){
                         $numeroCadeau +=1;
                         $id = $cadeau->getID();
@@ -45,21 +47,7 @@
                         <?php
                     }
                         ?>
-
-                    <p> Nouveau cadeau : 
-                    <form action="..\Controleur\ajouter_cadeau.php" method="post" enctype="multipart/form-data" >
-                        <input type="text" name="nom" value="" placeholder= "nom"/>
-                   
-                        <input type="text" name="desc" value="" placeholder="description" />
-                 
-                        <input type="file" name="image" value="" />
-                
-                        <input type="text" name="lien" value="" placeholder="lien"/>
- 
-                        <input type="submit" value="Ajouter"/>
-                    </form>                    
-
-                    <button type="button" name="annuler" onclick="invisible_gerer_inactif()">Annuler</button>
+                    <?php echo '<button type="button" name="annuler" onclick="invisible_gerer_inactif('.$membre->getID().')">Annuler</button>';?>
                 </div>
 
                 <form action="..\controleur\supprimer_inactif.php" method="get">
@@ -98,11 +86,11 @@
     </section>
 
     <script type="text/javascript">
-        function visible_gerer_inactif() {
-            document.getElementById("modifier-membre-inactif").className = "modifier-membre-inactif visible";
+        function visible_gerer_inactif(id) {
+            document.getElementById("modifier-membre-inactif"+id).className = "modifier-membre-inactif visible";
         }
-        function invisible_gerer_inactif(){
-            document.getElementById("modifier-membre-inactif").className = "modifier-membre-inactif invisible";
+        function invisible_gerer_inactif(id){
+            document.getElementById("modifier-membre-inactif"+id).className = "modifier-membre-inactif invisible";
         }
     </script>
 
