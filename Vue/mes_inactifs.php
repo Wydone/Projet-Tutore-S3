@@ -22,7 +22,7 @@
             echo "error sesInactifs";}
             $sesInactifs = $_SESSION['sesInactifs'];
             foreach($sesInactifs as $membre){
-                $id = $membre->getIdUser(); 
+                $id = $membre->getID(); 
                 echo $membre->getNom()." ".$membre->getPrenom() ; ?>
                
                 <form action="..\controleur\supprimer_inactif.php" method="get">

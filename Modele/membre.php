@@ -66,7 +66,7 @@ class Membre{
     function getPrenom(){
         return $this->prenom ; 
     }
-    function getIdUser() {
+    function getID() {
         return $this->id; 
     }
 //FONCTION DE CONNEXION (SI L'UTILISATEUR EXISTE DEJA)
