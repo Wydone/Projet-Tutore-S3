@@ -64,6 +64,38 @@
 
                 </div>
 
+
+                <?php echo '<button onclick="visible_gerer_inactif_groupe('.$membre->getID().')">Ses groupes</button>';?>
+
+                <?php echo '<div id="modifier-membre-inactif-groupe'.$membre->getID().'" class="modifier-membre-inactif-groupe invisible">';?>
+                    
+                <form action="..\Controleur\modifier_groupe_inactif.php" method="post">
+            
+                    <fieldset>
+                    <legend>Modifer ses groupes : </legend>
+
+                    <?php
+                    $sesGroupesMembre=$_SESSION['sesGroupesMembre'];
+                    foreach($sesGroupesMembre as $groupe){
+                        if(!$membre->verifGroupe($groupe->getIdGroupe(), $membre->getID())){
+                        echo "<input type='checkbox' name='groupe[]' value='".$groupe->getIdGroupe()."' >";
+                        }else echo "<input type='checkbox' name='groupe[]' value='".$groupe->getIdGroupe()."' checked>";
+                        
+                        echo "<label for='groupe'>".$groupe->getNom()."</label><br>" ;
+                    }
+                    ?>
+                    </fieldset>
+                    <?php echo "<input type = 'hidden' name='idUserInactif' value='$id'>";?>
+                <input type="submit" value="Modifier"/>
+             </form>
+                   
+                    <?php echo '<button type="button" name="annuler" onclick="invisible_gerer_inactif_groupe('.$membre->getID().')">Annuler</button>';?>
+
+                </div>
+
+
+
+
                 <form action="..\controleur\supprimer_inactif.php" method="get">
                     
                     <?php echo "<input type = 'hidden' name='idUserInactif' value='$id'>";?>
@@ -105,6 +137,13 @@
         }
         function invisible_gerer_inactif(id){
             document.getElementById("modifier-membre-inactif"+id).className = "modifier-membre-inactif invisible";
+        }
+
+        function visible_gerer_inactif_groupe(id) {
+            document.getElementById("modifier-membre-inactif-groupe"+id).className = "modifier-membre-inactif-groupe visible";
+        }
+        function invisible_gerer_inactif_groupe(id){
+            document.getElementById("modifier-membre-inactif-groupe"+id).className = "modifier-membre-inactif-groupe invisible";
         }
     </script>
 

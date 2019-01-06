@@ -261,6 +261,28 @@ class Membre{
         return $sesCadeaux;
     }
 
+    function verifGroupe($idGroupe, $idUser) {
+        $requete = "SELECT * FROM appartient WHERE idGroupe = '$idGroupe' AND idUser ='$idUser' " ;
+        $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert1 impossible ".mysqli_error($this->co));
+        
+        if(mysqli_num_rows($result) != 0)return true; 
+        else return false ; 
+    }
+
+    function modifierGroupe($sesGroupes, $idUserInactif) {
+        
+        foreach ($this->sesGroupesMembre as $groupe){
+            $requete = "DELETE FROM appartient Where idUser = $idUserInactif" ;
+            $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert dans APPARTIENT impossible ".mysqli_error($this->co));
+        }
+        
+        foreach ($sesGroupes as $groupeID){
+            $requete = "INSERT INTO appartient (idGroupe, idUser) VALUES ($groupeID, $idUserInactif)" ;
+            $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert dans APPARTIENT impossible ".mysqli_error($this->co));
+        }
+
+    }
+
 //trouver le nom et prenom en fonction de ID
     function trouverNomPrenom(){
       $requete = "SELECT nomUser,prenomUser FROM USERS WHERE idUser = $this->id" ;
