@@ -48,12 +48,12 @@
         <a class="nav-link" href="../Vue/mon_profil.php">Mon profil</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Mes inactifs</a>
+        <a class="nav-link" href="../Controleur/charger_inactifs.php">Mes inactifs</a>
       </li>
     </ul>
   <ul class="navbar-nav ml-lg-auto">
     <li class="nav-item">
-      <a class="nav-link" href="#">Deconnexion</a>
+      <a class="nav-link" href="../Controleur/deconnexion.php">Deconnexion</a>
     </li>
   </ul>
   </div>
