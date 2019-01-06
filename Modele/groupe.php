@@ -32,6 +32,10 @@ class Groupe {
     function getCreateur() {
         return $this->createur;
     }
+    
+    function getIdGroupe() {
+        return $this->id ; 
+    }
 
 
     function getSesMembres(){

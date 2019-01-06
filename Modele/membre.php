@@ -13,9 +13,12 @@ class Membre{
     private $login;
     private $mdp;
     private $email;
+    private $idCreateur; // utile seulement si le membre est un membre inactif 
     private $sesCadeaux; //la liste de ses cadeaux souhaité
     private $sesGroupesAdmin; //la liste des groupes qu'il administre
     private $sesGroupesMembre; //la liste des groupes dont il est membre
+    private $sesInactifs ; //liste des membres inactifs que l'utilisateur à créé
+
 //------------------------
 //CONSTRUCTEUR DE MEMBRES
 //------------------------
@@ -26,6 +29,7 @@ class Membre{
         $this->sesCadeaux = array();
         $this->sesGroupesAdmin = array();
         $this->sesGroupesMembre = array();
+        $this->sesInactifs = array() ; 
         $nbArg = func_num_args();
         if($nbArg == 1){
           $this->id = func_get_arg(0);
@@ -39,13 +43,18 @@ class Membre{
             $this->email = func_get_arg(2);
             $this->login = func_get_arg(3);
             $this->mdp = func_get_arg(4);
-        }else if($nbArg ==6) {
+        }else if($nbArg == 6) {
             $this->nom = func_get_arg(0);
             $this->prenom = func_get_arg(1);
             $this->email = func_get_arg(2);
             $this->login = func_get_arg(3);
             $this->mdp = func_get_arg(4);
             $this->id = func_get_arg(5);
+        }else if($nbArg == 4) {
+            $this->nom = func_get_arg(0);
+            $this->prenom = func_get_arg(1);
+            $this->id = func_get_arg(2); 
+            $this->idCreateur = func_get_arg(3); 
         }
     }
 //----------------
@@ -57,11 +66,13 @@ class Membre{
     function getNom() {
         return $this->nom ;
     }
-    function getPrenom() {
-        return $this->prenom ;
+
+    function getPrenom(){
+        return $this->prenom ; 
     }
     function getID() {
-        return $this->id ;
+        return $this->id; 
+
     }
 //FONCTION DE CONNEXION (SI L'UTILISATEUR EXISTE DEJA)
     function connexion($login, $mdp){
@@ -83,7 +94,11 @@ class Membre{
         $_SESSION['sesCadeaux']= $this->sesCadeaux;
         $_SESSION['sesGroupesAdmin']= $this->sesGroupesAdmin;
         $_SESSION['sesGroupesMembre']= $this->sesGroupesMembre;
+
+        $_SESSION['sesInactifs']= $this->sesInactifs;
+
         $_SESSION['idLastGroupe']=1;
+
     }
 //FONCTION DE DECONNEXION
     function deconnexion() {
@@ -166,7 +181,7 @@ class Membre{
 
         //$desc = NULL;
         $img = NULL ;
-       // $lien = NULL;
+       //    $lien = NULL;
 
         $requete = "INSERT INTO Cadeau (nomCadeau, descriptionCadeau, imageCadeau, lienCadeau, acheteCadeau, idUser, idUser_acheteur) VALUES ('$nom', '$desc', '$img', '$lien' , false , '$this->id', null)" ;
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
@@ -180,6 +195,54 @@ class Membre{
         return $this->getSesCadeaux();
     }
 
+
+//FONCTION POUR OBTENIR LA LISTE DES MEMBRES INACTIFS QUE LE MEMBRE A CREE
+    function getSesInactifs() {
+        $requete = "SELECT idUser, nomUser, prenomUser FROM users NATURAL JOIN userinactif WHERE idUser_useractif = '$this->id'";
+        $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
+        while($row = mysqli_fetch_assoc($result)){
+            $membre = new Membre($row['nomUser'], $row['prenomUser'], $row['idUser'], $this->id);
+            array_push($this->sesInactifs, $membre);
+        }
+        //met a jour la session
+        $_SESSION['sesInactifs']= $this->sesInactifs;
+        return $this->sesInactifs;
+    }
+
+//FONCTION POUR AJOUTER UN MEMBRE INACTIF A MA LISTE D'INACTIFS
+    function ajouterInactif($nom , $prenom, $idCreateur, $sesGroupes){
+        
+        $requete1 = "INSERT INTO USERS (nomUser, prenomUser)VALUES ('$nom', '$prenom')" ;
+        $result = mysqli_query($this->co, $requete1)  or die ("Exécution de la requête insert1 impossible ".mysqli_error($this->co));
+        $requete2 = "INSERT INTO USERINACTIF SELECT idUser, '$idCreateur' FROM USERS WHERE idUser = LAST_INSERT_ID()";
+        $result = mysqli_query($this->co, $requete2)  or die ("Exécution de la requête insert2 impossible ".mysqli_error($this->co));
+        
+        foreach ($sesGroupes as $groupeID){
+            $requete = "INSERT INTO appartient (idGroupe, idUser) VALUES ($groupeID, LAST_INSERT_ID())" ;
+            $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert dans APPARTIENT impossible ".mysqli_error($this->co));
+        }
+
+        return $this->getSesInactifs(); 
+    }
+//FONCTION DE SUPPRESSION D'UN MEMBRE INACTIF 
+    function supprimerInactif($id){
+        $requete1 = "DELETE FROM users Where idUser = $id" ;
+        $result = mysqli_query($this->co, $requete1)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+        $requete2 = "DELETE FROM userinactif Where idUser = $id" ;
+        $result = mysqli_query($this->co, $requete2)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+        
+
+        $requete3 = "SELECT idUser FROM appartient Where idUser = $id" ;
+        $result = mysqli_query($this->co, $requete3)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+
+        while($row = mysqli_fetch_assoc($result)){
+            $requete = "DELETE FROM appartient Where idUser = $id" ;
+            $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+        }
+
+        return $this->getSesInactifs();
+    }
+
 //trouver le nom et prenom en fonction de ID
     function trouverNomPrenom(){
       $requete = "SELECT nomUser,prenomUser FROM USERS WHERE idUser = $this->id" ;
@@ -191,5 +254,6 @@ class Membre{
     }
 
     //FIN CLASSE
+
 }
 ?>
