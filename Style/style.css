@@ -66,6 +66,10 @@ img.logo {
   .navbar {
         background: #b71540;
   }
+  .groupes {
+    display:none;
+    clear:both;
+  }
 
 }
 
@@ -160,7 +164,8 @@ img.logo {
   border-color: #b71540;
 }
 
-.box-connect input[type = "submit"],.box-connect a {
+.box-connect input[type = "submit"],.box-connect a, .ajout-membre input,.ajout-membre button
+, .nouveau-groupe input,.nouveau-groupe button {
   border: 0;
   background: rgba(50,50,50,0.3);
   display: block;
@@ -347,6 +352,7 @@ img.logo {
   background: #ccc;
   max-height: 74.4vh;
   overflow: auto;
+  min-width: 400px;
 }
 
 .un-groupe{
@@ -357,13 +363,121 @@ margin-bottom: 20px;*/
 border-bottom: 2px solid black;
 }
 
-.membre{
+.membres{
 
+  padding: 0;
+  margin:0;
+  background: #ccc;
+  max-height: 74.4vh;
+  width: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: inline-block;
+  float: none;
 }
+
 
 .un-membre{
 
+  height: 80%;
+  background: #ccc;
+  overflow: auto;
+  display: inline-block;
+  float: left;
+  border:2px solid #b71540;
+
+  text-align: center;
+
+
 }
+.add-membre, .suppr-membre{
+  padding: 0;
+  border: 0;
+  height: 80%;
+  background: #ccc;
+  overflow: auto;
+  display: inline-block;
+  float: left;
+  border:2px solid #b71540;
+
+}
+.center-membre{
+  height: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.center-membre button{
+  padding: 0;
+  border: 0;
+  display: block;
+  width:100%;
+  height: 100%;
+  outline: none;
+  font-size: 200px;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all ease 1.5s;
+}
+.center-membre p{
+  font-size: 20px;
+  transition: all ease 1.5s;
+}
+.center-membre p:hover{
+  transform:scale(0.6);
+  color: #b71540;
+}
+.center-membre i{
+  color: white;
+  transition: all ease 1s;
+}
+.center-membre i:hover {
+    transform: rotate(20deg) scale(0.6);
+    color: #b71540;
+}
+
+.btn-membre{
+  border: 0;
+  background: rgba(50,50,50,0.3);
+  display: block;
+  margin : 5px auto;
+  text-align: center;
+  border: 2px solid green;
+  padding: 14px 10px;
+  width:100%;
+  outline: none;
+  color: black;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.5s;
+}
+.btn-membre:hover{
+  width: 95%;
+  text-decoration: none;
+  border-left-width: 40px;
+
+  color: green;
+}
+
+.entete{
+margin-bottom: 20px;
+}
+.entete i{
+  margin-top: 15px;
+  font-size: 80px;
+}
+.table-cadeaux, .table-cadeaux table{
+  font-size: 20px;
+  margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
 .groupes button{
   padding: 0;
   border: 0;
@@ -404,4 +518,37 @@ border-bottom: 2px solid black;
 .un-groupe:hover i{
   color: green;
   transform: scale(2);
+}
+
+.visible{
+  display: block;
+}
+.invisible{
+  display: none;
+}
+
+.ajout-membre,.nouveau-groupe,.supprimer-groupe,.ajout-cadeau-membre {
+  position: fixed;
+    z-index: 1001;
+    top: 30%;
+    left: 47.5%;
+    text-align:  center;
+    background: #b71540;
+    border-radius: 25px;
+    box-shadow: 5px 5px 30px 0 rgba(50, 0, 0, 0.5);
+    margin: -75px 0 0 -150px;
+    width: 400px;
+    height: 450px;
+}
+.ajout-membre h2,.nouveau-groupe h2,.supprimer-groupe h2,.ajout-cadeau-membre h2{
+  margin-top: 30px;
+}
+
+
+.barrer{
+  text-decoration: line-through;
+}
+.vert{
+  color: green;
+  font-weight: bold;
 }

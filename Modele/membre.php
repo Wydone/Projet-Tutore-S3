@@ -31,7 +31,10 @@ class Membre{
         $this->sesGroupesMembre = array();
         $this->sesInactifs = array() ; 
         $nbArg = func_num_args();
-        if($nbArg == 2){ //connexion
+        if($nbArg == 1){
+          $this->id = func_get_arg(0);
+          $this->trouverNomPrenom();
+        }else if($nbArg == 2){ //connexion
             $this->login = func_get_arg(0) ;
             $this->mdp = func_get_arg(1) ;
         }else if($nbArg == 5){
@@ -63,11 +66,13 @@ class Membre{
     function getNom() {
         return $this->nom ;
     }
+
     function getPrenom(){
         return $this->prenom ; 
     }
     function getID() {
         return $this->id; 
+
     }
 //FONCTION DE CONNEXION (SI L'UTILISATEUR EXISTE DEJA)
     function connexion($login, $mdp){
@@ -89,8 +94,11 @@ class Membre{
         $_SESSION['sesCadeaux']= $this->sesCadeaux;
         $_SESSION['sesGroupesAdmin']= $this->sesGroupesAdmin;
         $_SESSION['sesGroupesMembre']= $this->sesGroupesMembre;
+
         $_SESSION['sesInactifs']= $this->sesInactifs;
-    
+
+        $_SESSION['idLastGroupe']=1;
+
     }
 //FONCTION DE DECONNEXION
     function deconnexion() {
@@ -137,7 +145,7 @@ class Membre{
         $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
         while($row = mysqli_fetch_assoc($result)){
-            $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau']);
+            $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau'], $row['acheteCadeau']);
             array_push($this->sesCadeaux, $cadeau);
         }
         //met a jour la session
@@ -158,10 +166,10 @@ class Membre{
     }
 //FONCTION POUR OBTENIR LA LISTE DES GROUPE DONT LE MEMBRE FAIT PARTIE
     function getSesGroupesMembre(){
-        $requete = "SELECT idGroupe, nomGroupe FROM groupe NATURAL JOIN appartient NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
+        $requete = "SELECT groupe.idGroupe, nomGroupe,groupe.idUser FROM groupe , appartient WHERE appartient.idUser='$this->id' AND appartient.idGroupe=groupe.idGroupe";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
         while($row = mysqli_fetch_assoc($result)){
-            $groupe = new Groupe($row['idGroupe'], $row['nomGroupe'], $this->id);
+            $groupe = new Groupe($row['idGroupe'], $row['nomGroupe'], $row['idUser']);
             array_push($this->sesGroupesMembre, $groupe);
         }
         //met a jour la session
@@ -186,6 +194,7 @@ class Membre{
         $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
         return $this->getSesCadeaux();
     }
+
 
 //FONCTION POUR OBTENIR LA LISTE DES MEMBRES INACTIFS QUE LE MEMBRE A CREE
     function getSesInactifs() {
@@ -233,5 +242,18 @@ class Membre{
 
         return $this->getSesInactifs();
     }
+
+//trouver le nom et prenom en fonction de ID
+    function trouverNomPrenom(){
+      $requete = "SELECT nomUser,prenomUser FROM USERS WHERE idUser = $this->id" ;
+      $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+      while($row = mysqli_fetch_assoc($result)){
+          $this->nom=$row['nomUser'];
+          $this->prenom=$row['prenomUser'];
+      }
+    }
+
+    //FIN CLASSE
+
 }
 ?>
