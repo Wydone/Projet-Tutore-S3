@@ -45,7 +45,7 @@
           <a class="dropdown-item" onclick="visible_nouveaugroupe_petitecran()">Créer un groupe</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../Vue/mon_profil.php">Mon profil</a>
+        <a class="nav-link" href="../Controleur/charger_profil.php">Mon profil</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../Controleur/charger_inactifs.php">Mes inactifs</a>

@@ -114,6 +114,12 @@
                           echo '<div class="entete">';
                               echo '<i class="fas fa-user-circle"></i><br />';
                               echo '<h2>'.$membre->getNom().' ' .$membre->getPrenom(). '</h2>';
+                              if ($inactif>0){
+                                echo '<p>ce membre vous appartient</p>';
+                              }elseif ($membre->estInactif($membre->getID())>0 ) {
+                                echo '<p>ce membre est inactif</p>';
+                              }
+
                           echo '</div>';
                           if ($inactif>0 or $membre->estInactif($membre->getID())>0 ) {
                             $sesCadeaux=$membre->getSesCadeauxInactif($membre->getID());
@@ -133,13 +139,13 @@
                                 if ($inactif>0) {//completer pour mes membres inactifs
 
 
-                                  $requeteListe2 = "SELECT idListe, idCadeau FROM contient WHERE idCadeau='".$cadeau->getID()."'" ;//listeid = idgroupe
-                                  $resultListe2 = mysqli_query($co, $requeteListe2)  or die ("Exécution de la requête insert impossible ".mysqli_error($co));
-                                  $countline2 =mysqli_num_rows($resultListe2);
-                                  if ($countline2>0) {//contient a idgroupe idcadeau
-                                    while ($rowListe2 = mysqli_fetch_assoc($resultListe2)) {
+                                  $requeteListe4 = "SELECT idListe, idCadeau FROM contient WHERE idCadeau='".$cadeau->getID()."'" ;//listeid = idgroupe
+                                  $resultListe4 = mysqli_query($co, $requeteListe4)  or die ("Exécution de la requête insert impossible ".mysqli_error($co));
+                                  $countline4 =mysqli_num_rows($resultListe4);
+                                  if ($countline4>0) {//contient a idgroupe idcadeau
+                                    while ($rowListe4 = mysqli_fetch_assoc($resultListe4)) {
 
-                                      if ($rowListe2['idListe']==$groupe->getID()) {
+                                      if ($rowListe4['idListe']==$groupe->getID()) {
                                         if ($cadeau->getAchete()==1) {
 
                                           echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0&idgroupe='.$groupe->getID().'"><i class="fas fa-check-square"></i></a></td>';
@@ -172,6 +178,7 @@
 
 
                                   }else {//sinon demande d'ajout'
+                                    echo '<td></td>';
                                     echo '<td>'.$cadeau->getNom().'</td>';
                                     echo '<td><a href="../Controleur/ajouter_cadeau_membre.php?id='.$cadeau->getID().'&idgroupe='.$groupe->getID().'"><p>Ajouter au groupe</p></a></td>';
 
@@ -202,8 +209,6 @@
 ///////////////////////
 //GESTION DES CADEAUX DE L'UTILISATEUR DANS UN GROUPE
 ///////////////////////
-
-
                                 //supprimer a tout jamais
                                 /*echo '<td><a href="../Controleur/supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';*/
 

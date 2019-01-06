@@ -25,7 +25,8 @@
         $sesCadeaux = $m->getSesCadeaux();
         $sesGroupesAdmin = $m->getSesGroupesAdmin() ;
         $sesGroupesMembre = $m->getSesGroupesMembre() ;
-       
+        $sesInactifs = $m->getSesInactifs() ;
+
 
         //require('..\Vue\mon_profil.php');
         header('Location: ..\Vue\mon_profil.php');
