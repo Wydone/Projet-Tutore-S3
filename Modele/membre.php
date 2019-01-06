@@ -222,6 +222,15 @@ class Membre{
         $requete2 = "DELETE FROM userinactif Where idUser = $id" ;
         $result = mysqli_query($this->co, $requete2)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
         
+
+        $requete3 = "SELECT idUser FROM appartient Where idUser = $id" ;
+        $result = mysqli_query($this->co, $requete3)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+
+        while($row = mysqli_fetch_assoc($result)){
+            $requete = "DELETE FROM appartient Where idUser = $id" ;
+            $result = mysqli_query($this->co, $requete)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
+        }
+
         return $this->getSesInactifs();
     }
 }
