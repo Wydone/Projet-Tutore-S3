@@ -83,6 +83,10 @@
           $bd->connect();
           $co = $bd->getConnexion() ;
 
+
+          $sesInactifs=$_SESSION['sesInactifs'];
+          $inactif =0;
+
           $sesGroupesMembre=$_SESSION['sesGroupesMembre'];
           foreach($sesGroupesMembre as $groupe){
             if ($_SESSION['idLastGroupe']==$groupe->getID()) {
@@ -96,12 +100,27 @@
                   while($row = mysqli_fetch_assoc($result)){
                         $membre = new Membre($row['idUser']);
                         //affichage d'un membre:
+
+                        foreach($sesInactifs as $membre_inactif){
+
+                          if ( $membre_inactif->getID() == $membre->getID()) {
+
+                            $inactif= $inactif+1;
+
+                          }
+                        }
+
                         echo '<div class=" col-sm-4 un-membre">';
                           echo '<div class="entete">';
                               echo '<i class="fas fa-user-circle"></i><br />';
                               echo '<h2>'.$membre->getNom().' ' .$membre->getPrenom(). '</h2>';
                           echo '</div>';
-                          $sesCadeaux=$membre->getSesCadeaux();
+                          if ($inactif>0 or $membre->estInactif($membre->getID())>0 ) {
+                            $sesCadeaux=$membre->getSesCadeauxInactif($membre->getID());
+                          }else {
+                            $sesCadeaux=$membre->getSesCadeaux();
+                          }
+
                           //table de cadeaux
 
                           echo '<div class="table-cadeaux">';
@@ -109,16 +128,70 @@
                             foreach($sesCadeaux as $cadeau){
                               echo '<tr>';
 
-                                if ($membre->getID()==$_SESSION['id'] && 1==2) {//completer pour mes membres inactifs
+
+
+                                if ($inactif>0) {//completer pour mes membres inactifs
+
+
+                                  $requeteListe2 = "SELECT idListe, idCadeau FROM contient WHERE idCadeau='".$cadeau->getID()."'" ;//listeid = idgroupe
+                                  $resultListe2 = mysqli_query($co, $requeteListe2)  or die ("Exécution de la requête insert impossible ".mysqli_error($co));
+                                  $countline2 =mysqli_num_rows($resultListe2);
+                                  if ($countline2>0) {//contient a idgroupe idcadeau
+                                    while ($rowListe2 = mysqli_fetch_assoc($resultListe2)) {
+
+                                      if ($rowListe2['idListe']==$groupe->getID()) {
+                                        if ($cadeau->getAchete()==1) {
+
+                                          echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0&idgroupe='.$groupe->getID().'"><i class="fas fa-check-square"></i></a></td>';
+                                          echo '<td class="barrer vert">'.$cadeau->getNom().'</td>';//dans la liste et acheter
+                                        }else {
+
+                                          echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1&idgroupe='.$groupe->getID().'"><i class="far fa-square"></i></a></td>';
+                                          echo '<td class="vert">'.$cadeau->getNom().'</td>';//dans la liste pas acheter
+                                        }
+                                        // si le cadeau appartient à ce groupe alors on peut le suppr
+
+                                        echo '<td><a href="../Controleur/supprimer_cadeau_membre.php?id='.$cadeau->getID().'&idgroupe='.$groupe->getID().'"><p>Supprimer</p></a></td>';
+                                      }else {
+                                        if ($cadeau->getAchete()==1) {
+
+                                          echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0&idgroupe='.$groupe->getID().'"><i class="fas fa-check-square"></i></a></td>';
+                                          echo '<td class="barrer">'.$cadeau->getNom().'</td>';//dans un groupe et acheter
+                                        }else {
+
+                                          echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1&idgroupe='.$groupe->getID().'"><i class="far fa-square"></i></a></td>';
+                                          echo '<td class="barrer">'.$cadeau->getNom().'</td>';//dans un groupe pas acheter
+                                        }
+                                        // code...
+
+                                        echo '<td><a href="#"><p>Deja un groupe</p></a></td>';
+                                      }
+
+                                    }
+
+
+
+                                  }else {//sinon demande d'ajout'
+                                    echo '<td>'.$cadeau->getNom().'</td>';
+                                    echo '<td><a href="../Controleur/ajouter_cadeau_membre.php?id='.$cadeau->getID().'&idgroupe='.$groupe->getID().'"><p>Ajouter au groupe</p></a></td>';
+
+                                  }
+
+
                                   //si cadeau acheter (acheteCadeau==1) alors barrer cadeau +image ok
-                                  if ($cadeau->getAchete()==1) {
+                                  /*if ($cadeau->getAchete()==1) {
                                     echo '<td class="barrer">'.$cadeau->getNom().'</td>';
                                     echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=0&idgroupe='.$groupe->getID().'"><i class="fas fa-check-square"></i></a></td>';
                                   }else {
                                     echo '<td>'.$cadeau->getNom().'</td>';
                                     echo '<td><a href="../Controleur/cocher_cadeau.php?id='.$cadeau->getID().'&newetat=1&idgroupe='.$groupe->getID().'"><i class="far fa-square"></i></a></td>';
                                   }
-                                echo '<td><a href="../Controleur/supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';
+                                echo '<td><a href="../Controleur/supprimer_cadeau_mes_groupes.php?id='.$cadeau->getID().'"><i class="fas fa-trash-alt"></i></a></td>';*/
+
+
+
+
+
 
 
 
@@ -192,6 +265,7 @@
                               }
                               echo '</tr>';
                             }
+                            $inactif=0;
                             echo '</table>';
                            echo '</div>';
                            //si l'user et le membre son la meme personne
