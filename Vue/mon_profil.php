@@ -54,9 +54,7 @@
                 <input type="submit" value="Supprimer"/>
             </form>
 
-       <?php }
-       
-    ?>
+       <?php } ?>
             <h2>Ajouter un cadeau à ma liste </h2>
             <form action="..\Controleur\ajouter_cadeau.php" method="post" enctype="multipart/form-data" >
                 <label for ="nom"> Nom : </label>

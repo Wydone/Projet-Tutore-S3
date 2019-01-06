@@ -142,8 +142,9 @@ class Membre{
     }
 //FONCTION POUR OBTENIR LA LISTE DES CADEAUX D'UN MEMBRE
     function getSesCadeaux(){
-        $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
-        $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
+        $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN useractif NATURAL JOIN userinactif WHERE idUser='$this->id'";
+        $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche cadeau impossible ".mysqli_error($this->co));
+        
         while($row = mysqli_fetch_assoc($result)){
             $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau'], $row['acheteCadeau']);
             array_push($this->sesCadeaux, $cadeau);
