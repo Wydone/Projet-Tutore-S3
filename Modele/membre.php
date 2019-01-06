@@ -144,6 +144,8 @@ class Membre{
     function getSesCadeaux(){
         $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN useractif WHERE idUser='$this->id'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
+        
+        
         while($row = mysqli_fetch_assoc($result)){
             $cadeau = new Cadeau($this->id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau'], $row['acheteCadeau']);
             array_push($this->sesCadeaux, $cadeau);
@@ -241,6 +243,22 @@ class Membre{
         }
 
         return $this->getSesInactifs();
+    }
+
+    function getSesCadeauxInactif($id){
+        $sesCadeaux = array() ; 
+        $bd = new bd();
+        $bd->connect();
+        $this->co = $bd->getConnexion() ;
+        $requete = "SELECT * FROM cadeau NATURAL JOIN users NATURAL JOIN userinactif WHERE idUser='$id'";
+        $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche cadeau impossible ".mysqli_error($this->co));
+        
+        while($row = mysqli_fetch_assoc($result)){
+            $cadeau = new Cadeau($id, $row['nomCadeau'], $row['descriptionCadeau'],$row['imageCadeau'],$row['lienCadeau'], $row['idCadeau'], $row['acheteCadeau']);
+            array_push($sesCadeaux, $cadeau);
+        }
+    
+        return $sesCadeaux;
     }
 
 //trouver le nom et prenom en fonction de ID
