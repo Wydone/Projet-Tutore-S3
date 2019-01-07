@@ -509,6 +509,8 @@ border-bottom: 2px solid black;
 }
 
 
+
+
 .entete{
 margin-bottom: 20px;
 }
@@ -638,15 +640,13 @@ margin-bottom: 20px;
   z-index: -2 ; 
 }
 
-.compte {
+.compte, .mesSouhaits{
   display: inline-block ; 
 
 }
 
 .btnSupprimer {
+
   float: right ;
   margin-left : 4px; 
-
-
-
 }

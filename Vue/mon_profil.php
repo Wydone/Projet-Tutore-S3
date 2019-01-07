@@ -40,6 +40,7 @@
     </section>
 <section class = "souhaits">
     <h1>Mes souhaits</h1>
+    <div class="compte">
     <?php
         $numeroCadeau = 0 ;
        
@@ -49,13 +50,18 @@
             $numeroCadeau +=1;
             $id = $cadeau->getID();
             echo $numeroCadeau.") ".$cadeau->getNom()." : ".$cadeau->getDesc()." est numero : ".$cadeau->getID(); ?>
-
-            <form action="..\controleur\supprimer_cadeau.php" method="get">
+            
+            <form action="..\controleur\supprimer_cadeau.php" method="get" class="btnSupprimer">
                 <?php echo "<input type = 'hidden' name='idCadeauSupprime' value='$id'>";?>
-                <input type="submit" value="Supprimer" class="btn btn-secondary"/>
+                <input type="submit" value="Supprimer" class="btn btn-secondary" />
             </form>
+        
+        
+        <br><br>
 
+           
        <?php } ?>
+       </div>
             <h2>Ajouter un cadeau à ma liste </h2>
             <form action="..\Controleur\ajouter_cadeau.php" method="post" enctype="multipart/form-data" >
                 <label for ="nom"> Nom : </label>
