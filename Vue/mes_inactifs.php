@@ -13,14 +13,16 @@
     <?php include'Composant/class.php'; ?>
     <?php include'Composant/navbar_connect.php';?>
 
-<section class="padding-page">
+<section class="padding-page center">
 
+<section class="listeCompte">
         <h1>Liste de mes comptes</h1>
         <?php
             if(!isset($_SESSION['sesInactifs'])){
             echo "error sesInactifs";}
             $sesInactifs = $_SESSION['sesInactifs'];
             foreach($sesInactifs as $membre){
+                
                 $id = $membre->getID();
                 echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID() ;
 
@@ -104,9 +106,9 @@
                 
         <?php    }
         ?>
-
+</section>
          
-
+<section class="creerCompte">
         <h1>Créer un nouveau compte</h1>
         <form action="..\Controleur\ajouter_inactif.php" method="post">
             <label for ="nom"> Nom : </label>
@@ -130,6 +132,7 @@
         </form>
 
     </section>
+            </section>
 
     <script type="text/javascript">
         function visible_gerer_inactif(id) {

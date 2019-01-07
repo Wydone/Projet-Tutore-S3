@@ -13,9 +13,9 @@
     <?php include'Composant/class.php'; ?>
     <?php include'Composant/navbar_connect.php';?>
 
-<section class="padding-page">
+<section class="padding-page center">
 
-
+<section class = "info">
     <h1>Mes infos</h1>
     <?php
         if(!isset($_SESSION['nom'])){
@@ -37,8 +37,8 @@
 
                 <input type="submit" value="Modifier"/>
             </form>
-
-
+    </section>
+<section class = "souhaits">
     <h1>Mes souhaits</h1>
     <?php
         $numeroCadeau = 0 ;
@@ -72,6 +72,10 @@
                 <br>
                 <input type="submit" value="Ajouter"/>
             </form>
+
+        </section>
+
+<section class = "administre">
     <h1>Groupes que j'administre</h1>
     <?php
         if(!isset($_SESSION['sesGroupesAdmin'])){
@@ -82,7 +86,7 @@
         }
     ?>
 
-
+    </section>
 </section>
 
 

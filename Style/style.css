@@ -166,7 +166,8 @@ img.logo {
 
 .box-connect input[type = "submit"],.box-connect a, .ajout-membre input,.ajout-membre button
 , .nouveau-groupe input,.nouveau-groupe button , .modifier-membre-inactif input, 
-.modifier-membre-inactif button, .modifier-membre-inactif textarea, .modifier-membre-inactif input[type="file"] {
+.modifier-membre-inactif button, .modifier-membre-inactif textarea, .modifier-membre-inactif input[type="file"],
+.modifier-membre-inactif-groupe button, .modifier-membre-inactif-groupe input[type = "submit"] {
   border: 0;
   background: rgba(50,50,50,0.3);
   display: block;
@@ -599,4 +600,30 @@ margin-bottom: 20px;
 .vert{
   color: green;
   font-weight: bold;
+}
+
+.souhaits, .listeCompte {
+  width : 100% ; 
+  background-color:  white ; 
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: 0px 5px 10px #aaa;
+
+  z-index: 1 ; 
+}
+
+.administre, .creerCompte {
+  width:  100% ; 
+  padding-top: 20px;
+  padding-bottom: 20px;
+  box-shadow: 0px 5px 10px #aaa;
+  z-index: -1 ; 
+}
+
+.info {
+  width:  100% ; 
+  padding-top: 20px; 
+  padding-bottom: 20px;
+  box-shadow: 0px 5px 10px #aaa;
+  z-index: -2 ; 
 }
