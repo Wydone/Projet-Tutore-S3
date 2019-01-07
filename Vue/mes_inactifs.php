@@ -22,14 +22,14 @@
             echo "error sesInactifs";}
             $sesInactifs = $_SESSION['sesInactifs'];
             foreach($sesInactifs as $membre){
-                
+                echo "<div class='compte'>"; 
                 $id = $membre->getID();
                 echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID() ;
 
 
                 ?>
 
-                <?php echo '<button onclick="visible_gerer_inactif('.$membre->getID().')">Sa liste</button>';?>
+                <?php echo '<button onclick="visible_gerer_inactif('.$membre->getID().')" class="btn btn-danger">Sa liste</button>';?>
 
                   <?php echo '<div id="modifier-membre-inactif'.$membre->getID().'" class="modifier-membre-inactif invisible">';?>
                     <h2><?php echo $membre->getNom()." ".$membre->getPrenom()." ".$membre->getID() ; ?></h2>
@@ -67,7 +67,7 @@
                 </div>
 
 
-                <?php echo '<button onclick="visible_gerer_inactif_groupe('.$membre->getID().')">Ses groupes</button>';?>
+                <?php echo '<button onclick="visible_gerer_inactif_groupe('.$membre->getID().')" class="btn btn-danger">Ses groupes</button>';?>
 
                 <?php echo '<div id="modifier-membre-inactif-groupe'.$membre->getID().'" class="modifier-membre-inactif-groupe invisible">';?>
                     
@@ -97,12 +97,14 @@
 
 
 
-
-                <form action="..\controleur\supprimer_inactif.php" method="get">
+                
+                <form action="..\controleur\supprimer_inactif.php" method="get" class= "btnSupprimer">
                     
                     <?php echo "<input type = 'hidden' name='idUserInactif' value='$id'>";?>
-                    <input type="submit" value="Supprimer"/>
+                    <input type="submit" value="Supprimer" class="btn btn-secondary"/>
                 </form>
+                </div>
+                <br/><br/>
                 
         <?php    }
         ?>
@@ -128,7 +130,7 @@
                 }
                 ?>
             </fieldset>
-            <input type="submit" value="Créer"/>
+            <input type="submit" value="Créer" class= "btn-form"/>
         </form>
 
     </section>

@@ -35,7 +35,7 @@
                 <input type="password" name="verfimdp" value=""/>
                 <br>
 
-                <input type="submit" value="Modifier"/>
+                <input type="submit" value="Modifier" class= "btn-form"/>
             </form>
     </section>
 <section class = "souhaits">
@@ -52,7 +52,7 @@
 
             <form action="..\controleur\supprimer_cadeau.php" method="get">
                 <?php echo "<input type = 'hidden' name='idCadeauSupprime' value='$id'>";?>
-                <input type="submit" value="Supprimer"/>
+                <input type="submit" value="Supprimer" class="btn btn-secondary"/>
             </form>
 
        <?php } ?>
@@ -70,7 +70,7 @@
                 <label for ="lien"> lien : </label>
                 <input type="text" name="lien" value="" />
                 <br>
-                <input type="submit" value="Ajouter"/>
+                <input type="submit" value="Ajouter" class= "btn-form"/>
             </form>
 
         </section>
