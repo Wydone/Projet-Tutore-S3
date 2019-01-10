@@ -107,6 +107,7 @@ class Membre{
     }
 //FONCTION DE VERIFICATION POUR VOIR SI L'UTILISATEUR EXITE DANS LA BASE DE DONNEES
     function verifInfos($login, $mdp){
+
         $requete = "SELECT idUser FROM useractif WHERE loginUser='$login' AND passwordUser= '$mdp'";
         $result = mysqli_query($this->co, $requete) or die ("Exécution de la requête recherche impossible ".mysqli_error($this->co));
         if(mysqli_num_rows($result) == 1){
@@ -122,7 +123,10 @@ class Membre{
         $this->email = $this->co->real_escape_string($email);
         $this->login = $this->co->real_escape_string($login);
         $this->mdp = $this->co->real_escape_string($mdp);
+
+        
         if(!$this->verifInfos($login, $mdp)){
+
             $requete1 = "INSERT INTO USERS (nomUser, prenomUser)VALUES ('$nom', '$prenom' )" ;
             $result = mysqli_query($this->co, $requete1)  or die ("Exécution de la requête insert impossible ".mysqli_error($this->co));
             $requete2 = "INSERT INTO USERACTIF SELECT idUser, '$email', '$login', '$mdp', false FROM USERS WHERE idUser = LAST_INSERT_ID()";
@@ -150,7 +154,7 @@ class Membre{
 
 
         }else{
-            echo "Utilisateur existe deja ! " ;//gérer cette erreur
+            //echo "Utilisateur existe deja ! " ;//gérer cette erreur
             return false ;
         }
     }

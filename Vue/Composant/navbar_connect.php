@@ -37,7 +37,7 @@
           $sesGroupesMembre=$_SESSION['sesGroupesMembre'];
           foreach($sesGroupesMembre as $groupe){
 
-              echo '<a class="dropdown-item" href="../Controleur/load_groupe.php?idgroupe='.$groupe->getID().'">groupe Membre : '.$groupe->getNom()."</a>" ;
+              echo '<a class="dropdown-item" href="../Controleur/load_groupe.php?idgroupe='.$groupe->getID().'">'.$groupe->getNom()."</a>" ;
           }
 
           ?>

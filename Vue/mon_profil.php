@@ -49,7 +49,7 @@
         foreach($sesCadeaux as $cadeau){
             $numeroCadeau +=1;
             $id = $cadeau->getID();
-            echo $numeroCadeau.") ".$cadeau->getNom()." : ".$cadeau->getDesc()." est numero : ".$cadeau->getID(); ?>
+            echo $numeroCadeau.") ".$cadeau->getNom()." ".$cadeau->getDesc(); ?>
             
             <form action="..\controleur\supprimer_cadeau.php" method="get" class="btnSupprimer">
                 <?php echo "<input type = 'hidden' name='idCadeauSupprime' value='$id'>";?>

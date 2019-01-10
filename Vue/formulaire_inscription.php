@@ -17,24 +17,33 @@
         </div>
         <div class="col-6 ">
           <h2 class="center margin-h2-b">FORMULAIRE INSCRIPTION</h2>
+          <?php if(!empty( $_GET['errorExist'])) echo "<div class='alert alert-danger center' role='alert'>".$_GET['errorExist']."</div>" ; ?>
 
 <form class="box-connect" action="..\Controleur\inscription.php" method="post">
     <!--<label for ="email"> Adresse email : </label>-->
+    <?php if(!empty( $_GET['errorEmailVide'])) echo "<div class='alert alert-danger center' role='alert'>".$_GET['errorEmailVide']."</div>" ; ?>
     <input class="input-text" type="texte" name="email" value="" placeholder="E-mail"/>
     <br>
     <!--<label for ="nom"> Nom : </label>-->
+    <?php if(!empty( $_GET['errorNomVide'])) echo "<div class='alert alert-danger center' role='alert'>".$_GET['errorNomVide']."</div>" ; ?>
     <input type="text" name="nom" value="" placeholder="Nom"/>
     <br>
     <!--<label for ="prenom"> Prenom : </label>-->
+    <?php if(!empty( $_GET['errorPrenomVide'])) echo "<div class='alert alert-danger center' role='alert'>".$_GET['errorPrenomVide']."</div>" ; ?>
     <input class="input-text" type="texte" name="prenom" value="" placeholder="Prénom"/>
     <br>
     <!--<label for ="login"> Login : </label>-->
+    <?php if(!empty( $_GET['errorLoginVide'])) echo "<div class='alert alert-danger center' role='alert'>".$_GET['errorLoginVide']."</div>" ; ?>
     <input class="input-text" type="texte" name="login" value="" placeholder="Login"/>
     <br>
     <!--<label for ="mdp"> Mot de passe : </label>-->
+    <?php if(!empty( $_GET['errorMdpVide'])) echo "<div class='alert alert-danger center' role='alert'>".$_GET['errorMdpVide']."</div>" ; ?>
+    <?php if(!empty( $_GET['errorMdpMatch'])) echo "<div class='alert alert-danger center' role='alert'>".$_GET['errorMdpMatch']."</div>" ; ?>
     <input type="password" name="mdp" value="" placeholder="Mot de passe"/>
     <br>
     <!--<label for ="verifMdp"> Vérif mot de passe : </label>-->
+    <?php if(!empty( $_GET['errorMdpVerfiVide'])) echo "<div class='alert alert-danger center' role='alert'>".$_GET['errorMdpVerfiVide']."</div>" ; ?>
+    <?php if(!empty( $_GET['errorMdpVerif'])) echo "<div class='alert alert-danger center' role='alert'>".$_GET['errorMdpVerif']."</div>" ; ?>
     <input type="password" name="verifMdp" value="" placeholder="Vérification Mot de passe"/>
     <br>
     <input type="submit" value="Créer un compte"/>
