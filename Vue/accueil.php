@@ -19,6 +19,7 @@
 
             <form class="box-connect" action="..\Controleur\connexion.php" method="post">
                 <!--<label for ="pseudo"> login : </label><br>-->
+                <?php if(!empty( $_GET['errorUnknowUser'])) echo "<div class='alert alert-danger center' role='alert'>".$_GET['errorUnknowUser']."</div>" ; ?>
                 <input type="text" name="login" placeholder="Login" value="" />
                 <br>
                 <!--<label for ="mdp"> Mot de passe : </label><br>-->

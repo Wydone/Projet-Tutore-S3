@@ -32,7 +32,8 @@
         header('Location: ..\Vue\mon_profil.php');
 
     }else {
-        echo "Utilisateur inconnu" ; // erreur à traiter
+        $errorUnknowUser = "Utilisateur inconnu" ; // erreur à traiter
+        header('Location: ..\Vue\accueil.php?errorUnknowUser='.$errorUnknowUser.'');
     }
 
 
